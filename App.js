@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -14,8 +14,11 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  Button,
+  ActivityIndicator,
   useColorScheme,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -25,6 +28,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {
+  useStripeIdentity,
+  IdentityVerificationSheetOptions,
+} from '@stripe/stripe-identity-react-native';
+
+import logo from './assets/RocketRides.png';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
@@ -61,6 +71,48 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const [options, setOptions] = useState<VerificationSessionOptions>({
+    requireMatchingSelfie: false,
+    requireIdNumber: false,
+    allowedTypes: {
+      ['driving_license']: true,
+      ['id_card']: true,
+      ['passport']: true,
+    },
+    requireLiveCapture: false,
+  });
+
+  const fetchOptions = useCallback(async () => {
+    return {
+      sessionId: 'vs_1M73GDGMZYGNxJkBXchPkSD1',
+      ephemeralKeySecret: 'ek_live_YWNjdF8xSDM0ZFhHTVpZR054SmtCLHRJc21CVEJYVDl5Y1lMNnpTVnBlVmhidVVLcVhyUlM_00uOuclWPR',
+      brandLogo: Image.resolveAssetSource(logo),
+    };
+  }, [options]);
+
+  const { status, present, loading } = useStripeIdentity(fetchOptions);
+
+  const handlePress = useCallback(() => {
+    present();
+  }, [present]);
+
+  const renderButton = useCallback(() => {
+    if (loading) {
+      return (
+        <View testID="loading-spinner">
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    return (
+      <Button
+        testID="verify-btn"
+        title="Verify Identity"
+        onPress={handlePress}
+      />
+    );
+  }, [loading, handlePress]);
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -78,6 +130,7 @@ const App: () => Node = () => {
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js</Text> to change this
             screen and then come back to see your edits.
+            <View style={styles.buttonContainer}>{renderButton()}</View>
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
