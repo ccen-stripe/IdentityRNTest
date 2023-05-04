@@ -1,0 +1,2304 @@
+diff --git a/node_modules/@stripe/stripe-identity-react-native/README.md b/node_modules/@stripe/stripe-identity-react-native/README.md
+index aaa34e1..786b630 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/README.md
++++ b/node_modules/@stripe/stripe-identity-react-native/README.md
+@@ -33,6 +33,8 @@ Alternatively use the `plugin-transform-typescript` plugin in your project.
+     > See more details about material theme [here](https://material.io/develop/android/theming/dark).
+ 
+ #### iOS
++> Note: [Xcode 13 is no longer supported by Apple](https://developer.apple.com/news/upcoming-requirements/). Please upgrade to Xcode 14.1 or later.
++
+ - Compatible with apps targeting iOS 13.0 or above.
+ - Run `pod install` in your `ios` directory to ensure that you also install the required native dependencies.
+ - Stripe Identity requires access to the device’s camera to capture identity documents. To enable your app to request camera permissions:
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/.idea/.npmignore b/node_modules/@stripe/stripe-identity-react-native/android/.idea/.gitignore
+similarity index 100%
+rename from node_modules/@stripe/stripe-identity-react-native/android/.idea/.npmignore
+rename to node_modules/@stripe/stripe-identity-react-native/android/.idea/.gitignore
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build.gradle b/node_modules/@stripe/stripe-identity-react-native/android/build.gradle
+index 5f2c060..223cb69 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build.gradle
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build.gradle
+@@ -124,10 +124,11 @@ repositories {
+ }
+ 
+ def kotlin_version = getExtOrDefault('kotlinVersion')
++def stripe_version = getExtOrDefault('stripeVersion')
+ 
+ dependencies {
+   // noinspection GradleDynamicVersion
+   api 'com.facebook.react:react-native:+'
+   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+-  implementation 'com.stripe:identity:20.+'
++  implementation "com.stripe:identity:$stripe_version"
+ }
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/39cba514e00d31fc17ba30e310f3f4ba/results.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/02e3d120adca974164b88d48f6e03d48/results.bin
+similarity index 100%
+rename from node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/39cba514e00d31fc17ba30e310f3f4ba/results.bin
+rename to node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/02e3d120adca974164b88d48f6e03d48/results.bin
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/02e3d120adca974164b88d48f6e03d48/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/02e3d120adca974164b88d48f6e03d48/transformed/classes/classes.dex
+new file mode 100644
+index 0000000..80de9de
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/02e3d120adca974164b88d48f6e03d48/transformed/classes/classes.dex differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/results.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/transformed/classes/classes.dex
+new file mode 100644
+index 0000000..32eae50
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/159218a2b30018e23d3717f3591a5993/transformed/classes/classes.dex differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/results.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/transformed/classes/classes.dex
+new file mode 100644
+index 0000000..13ebad5
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/18db2bfb49ba899c2b986359a8298069/transformed/classes/classes.dex differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/results.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/transformed/classes/classes.dex
+new file mode 100644
+index 0000000..32eae50
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/25a9f07040a89050bbd0f9e227aef355/transformed/classes/classes.dex differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/39cba514e00d31fc17ba30e310f3f4ba/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/39cba514e00d31fc17ba30e310f3f4ba/transformed/classes/classes.dex
+deleted file mode 100644
+index 8de3031..0000000
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/39cba514e00d31fc17ba30e310f3f4ba/transformed/classes/classes.dex and /dev/null differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/results.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/transformed/classes/classes.dex b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/transformed/classes/classes.dex
+new file mode 100644
+index 0000000..13ebad5
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/.transforms/fca7491ed257f5c5f608fb7ac8231d26/transformed/classes/classes.dex differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_library_classes_jar/debug/classes.jar b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_library_classes_jar/debug/classes.jar
+index e1ef11c..8a1a085 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_library_classes_jar/debug/classes.jar and b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_library_classes_jar/debug/classes.jar differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_r_class_jar/debug/R.jar b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_r_class_jar/debug/R.jar
+index 9c9694b..9be1450 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_r_class_jar/debug/R.jar and b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_r_class_jar/debug/R.jar differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_symbol_list/debug/R.txt b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_symbol_list/debug/R.txt
+index 23291e4..6be6994 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_symbol_list/debug/R.txt
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/compile_symbol_list/debug/R.txt
+@@ -207,7 +207,6 @@ int attr behavior_saveFlags 0x0
+ int attr behavior_significantVelocityThreshold 0x0
+ int attr behavior_skipCollapsed 0x0
+ int attr blendSrc 0x0
+-int attr borderDrawable 0x0
+ int attr borderRound 0x0
+ int attr borderRoundPercent 0x0
+ int attr borderWidth 0x0
+@@ -1122,6 +1121,9 @@ int attr state_with_icon 0x0
+ int attr statusBarBackground 0x0
+ int attr statusBarForeground 0x0
+ int attr statusBarScrim 0x0
++int attr stripeBackgroundColor 0x0
++int attr stripeBorderDrawable 0x0
++int attr stripeViewFinderType 0x0
+ int attr strokeColor 0x0
+ int attr strokeWidth 0x0
+ int attr subMenuArrow 0x0
+@@ -1324,7 +1326,6 @@ int attr values 0x0
+ int attr verticalOffset 0x0
+ int attr verticalOffsetWithText 0x0
+ int attr viewAspectRatio 0x0
+-int attr viewFinderType 0x0
+ int attr viewInflaterClass 0x0
+ int attr viewTransitionMode 0x0
+ int attr viewTransitionOnCross 0x0
+@@ -1408,7 +1409,6 @@ int color cardview_shadow_end_color 0x0
+ int color cardview_shadow_start_color 0x0
+ int color catalyst_logbox_background 0x0
+ int color catalyst_redbox_background 0x0
+-int color check_mark_background 0x0
+ int color design_bottom_navigation_shadow_color 0x0
+ int color design_box_stroke_color 0x0
+ int color design_dark_default_color_background 0x0
+@@ -1453,13 +1453,10 @@ int color dim_foreground_material_dark 0x0
+ int color dim_foreground_material_light 0x0
+ int color error_color_material_dark 0x0
+ int color error_color_material_light 0x0
+-int color error_exclamation_color 0x0
+-int color flash_mask_color 0x0
+ int color foreground_material_dark 0x0
+ int color foreground_material_light 0x0
+ int color highlighted_text_material_dark 0x0
+ int color highlighted_text_material_light 0x0
+-int color id_border_initial_color 0x0
+ int color m3_appbar_overlay_color 0x0
+ int color m3_assist_chip_icon_tint_color 0x0
+ int color m3_assist_chip_stroke_color 0x0
+@@ -1983,7 +1980,6 @@ int color mtrl_textinput_hovered_box_stroke_color 0x0
+ int color notification_action_color_filter 0x0
+ int color notification_icon_bg_color 0x0
+ int color notification_material_background_media_default_color 0x0
+-int color plus_icon_tint 0x0
+ int color primary_dark_material_dark 0x0
+ int color primary_dark_material_light 0x0
+ int color primary_material_dark 0x0
+@@ -1992,7 +1988,6 @@ int color primary_text_default_material_dark 0x0
+ int color primary_text_default_material_light 0x0
+ int color primary_text_disabled_material_dark 0x0
+ int color primary_text_disabled_material_light 0x0
+-int color privacy_policy_icon_tint 0x0
+ int color ripple_material_dark 0x0
+ int color ripple_material_light 0x0
+ int color secondary_text_default_material_dark 0x0
+@@ -2000,18 +1995,24 @@ int color secondary_text_default_material_light 0x0
+ int color secondary_text_disabled_material_dark 0x0
+ int color secondary_text_disabled_material_light 0x0
+ int color stripeNotFoundBackground 0x0
++int color stripe_check_mark_background 0x0
++int color stripe_error_exclamation_color 0x0
++int color stripe_flash_mask_color 0x0
++int color stripe_id_border_initial_color 0x0
++int color stripe_plus_icon_tint 0x0
++int color stripe_privacy_policy_icon_tint 0x0
++int color stripe_time_estimate_icon_tint 0x0
++int color stripe_viewfinder_border_center 0x0
+ int color switch_thumb_disabled_material_dark 0x0
+ int color switch_thumb_disabled_material_light 0x0
+ int color switch_thumb_material_dark 0x0
+ int color switch_thumb_material_light 0x0
+ int color switch_thumb_normal_material_dark 0x0
+ int color switch_thumb_normal_material_light 0x0
+-int color time_estimate_icon_tint 0x0
+ int color tooltip_background_dark 0x0
+ int color tooltip_background_light 0x0
+ int color vector_tint_color 0x0
+ int color vector_tint_theme_color 0x0
+-int color viewfinder_border_center 0x0
+ int dimen abc_action_bar_content_inset_material 0x0
+ int dimen abc_action_bar_content_inset_with_nav 0x0
+ int dimen abc_action_bar_default_height_material 0x0
+@@ -2097,7 +2098,6 @@ int dimen appcompat_dialog_background_inset 0x0
+ int dimen autofill_inline_suggestion_icon_size 0x0
+ int dimen browser_actions_context_menu_max_width 0x0
+ int dimen browser_actions_context_menu_min_padding 0x0
+-int dimen camera_permission_title_text_size 0x0
+ int dimen cardview_compat_inset_shadow 0x0
+ int dimen cardview_default_elevation 0x0
+ int dimen cardview_default_radius 0x0
+@@ -2109,7 +2109,6 @@ int dimen compat_button_padding_vertical_material 0x0
+ int dimen compat_control_corner_material 0x0
+ int dimen compat_notification_large_icon_max_height 0x0
+ int dimen compat_notification_large_icon_max_width 0x0
+-int dimen consent_title_text_size 0x0
+ int dimen def_drawer_elevation 0x0
+ int dimen design_appbar_elevation 0x0
+ int dimen design_bottom_navigation_active_item_max_width 0x0
+@@ -2161,8 +2160,6 @@ int dimen design_tab_text_size_2line 0x0
+ int dimen design_textinput_caption_translate_y 0x0
+ int dimen disabled_alpha_material_dark 0x0
+ int dimen disabled_alpha_material_light 0x0
+-int dimen doc_selection_title_text_size 0x0
+-int dimen error_title_text_size 0x0
+ int dimen fastscroll_default_thickness 0x0
+ int dimen fastscroll_margin 0x0
+ int dimen fastscroll_minimum_range 0x0
+@@ -2173,11 +2170,9 @@ int dimen hint_alpha_material_dark 0x0
+ int dimen hint_alpha_material_light 0x0
+ int dimen hint_pressed_alpha_material_dark 0x0
+ int dimen hint_pressed_alpha_material_light 0x0
+-int dimen item_horizontal_margin 0x0
+ int dimen item_touch_helper_max_drag_scroll_per_frame 0x0
+ int dimen item_touch_helper_swipe_escape_max_velocity 0x0
+ int dimen item_touch_helper_swipe_escape_velocity 0x0
+-int dimen item_vertical_margin 0x0
+ int dimen m3_alert_dialog_action_bottom_padding 0x0
+ int dimen m3_alert_dialog_action_top_padding 0x0
+ int dimen m3_alert_dialog_corner_size 0x0
+@@ -2728,13 +2723,21 @@ int dimen notification_small_icon_size_as_large 0x0
+ int dimen notification_subtext_size 0x0
+ int dimen notification_top_pad 0x0
+ int dimen notification_top_pad_large_text 0x0
+-int dimen page_horizontal_margin 0x0
+-int dimen page_vertical_margin 0x0
+-int dimen scan_title_text_size 0x0
+ int dimen sliding_pane_detail_pane_width 0x0
+ int dimen stripeViewFinderHorizontalBias 0x0
+ int dimen stripeViewFinderMargin 0x0
+ int dimen stripeViewFinderVerticalBias 0x0
++int dimen stripe_camera_permission_title_text_size 0x0
++int dimen stripe_consent_title_text_size 0x0
++int dimen stripe_doc_selection_title_text_size 0x0
++int dimen stripe_error_title_text_size 0x0
++int dimen stripe_item_horizontal_margin 0x0
++int dimen stripe_item_vertical_margin 0x0
++int dimen stripe_page_horizontal_margin 0x0
++int dimen stripe_page_vertical_margin 0x0
++int dimen stripe_scan_title_text_size 0x0
++int dimen stripe_upload_title_text_size 0x0
++int dimen stripe_view_finder_corner_radius 0x0
+ int dimen subtitle_corner_radius 0x0
+ int dimen subtitle_outline_width 0x0
+ int dimen subtitle_shadow_offset 0x0
+@@ -2747,8 +2750,6 @@ int dimen tooltip_precise_anchor_threshold 0x0
+ int dimen tooltip_vertical_padding 0x0
+ int dimen tooltip_y_offset_non_touch 0x0
+ int dimen tooltip_y_offset_touch 0x0
+-int dimen upload_title_text_size 0x0
+-int dimen view_finder_corner_radius 0x0
+ int drawable abc_ab_share_pack_mtrl_alpha 0x0
+ int drawable abc_action_bar_item_background_material 0x0
+ int drawable abc_btn_borderless_material 0x0
+@@ -2851,20 +2852,14 @@ int drawable btn_radio_off_mtrl 0x0
+ int drawable btn_radio_off_to_on_mtrl_animation 0x0
+ int drawable btn_radio_on_mtrl 0x0
+ int drawable btn_radio_on_to_off_mtrl_animation 0x0
+-int drawable check_mark 0x0
+-int drawable clock_icon 0x0
+ int drawable design_fab_background 0x0
+ int drawable design_ic_visibility 0x0
+ int drawable design_ic_visibility_off 0x0
+ int drawable design_password_eye 0x0
+ int drawable design_snackbar_background 0x0
+ int drawable ic_arrow_back_black_24 0x0
+-int drawable ic_baseline_arrow_back_24 0x0
+-int drawable ic_baseline_close_24 0x0
+-int drawable ic_chevron_down 0x0
+ int drawable ic_clear_black_24 0x0
+ int drawable ic_clock_black_24dp 0x0
+-int drawable ic_exclamation 0x0
+ int drawable ic_keyboard_black_24dp 0x0
+ int drawable ic_m3_chip_check 0x0
+ int drawable ic_m3_chip_checked_circle 0x0
+@@ -2874,7 +2869,6 @@ int drawable ic_mtrl_chip_checked_black 0x0
+ int drawable ic_mtrl_chip_checked_circle 0x0
+ int drawable ic_mtrl_chip_close_circle 0x0
+ int drawable ic_search_black_24 0x0
+-int drawable ic_stripe_square_32 0x0
+ int drawable m3_appbar_background 0x0
+ int drawable m3_avd_hide_password 0x0
+ int drawable m3_avd_show_password 0x0
+@@ -2946,17 +2940,25 @@ int drawable notification_template_icon_bg 0x0
+ int drawable notification_template_icon_low_bg 0x0
+ int drawable notification_tile_bg 0x0
+ int drawable notify_panel_notification_icon_bg 0x0
+-int drawable plus_icon 0x0
+-int drawable privacy_policy_icon 0x0
+ int drawable redbox_top_border_background 0x0
++int drawable stripe_arrow_back 0x0
++int drawable stripe_camera_icon 0x0
++int drawable stripe_check_mark 0x0
++int drawable stripe_clock_icon 0x0
++int drawable stripe_close 0x0
++int drawable stripe_exclamation 0x0
++int drawable stripe_ic_chevron_down 0x0
+ int drawable stripe_ic_search 0x0
++int drawable stripe_plus_icon 0x0
++int drawable stripe_privacy_policy_icon 0x0
++int drawable stripe_square 0x0
++int drawable stripe_time_estimate_icon 0x0
++int drawable stripe_viewfinder_background 0x0
++int drawable stripe_viewfinder_border_found 0x0
++int drawable stripe_viewfinder_border_initial 0x0
+ int drawable test_level_drawable 0x0
+-int drawable time_estimate_icon 0x0
+ int drawable tooltip_frame_dark 0x0
+ int drawable tooltip_frame_light 0x0
+-int drawable viewfinder_background 0x0
+-int drawable viewfinder_border_found 0x0
+-int drawable viewfinder_border_initial 0x0
+ int id BOTTOM_END 0x0
+ int id BOTTOM_START 0x0
+ int id NO_DEBUG 0x0
+@@ -3292,7 +3294,12 @@ int id pathRelative 0x0
+ int id percent 0x0
+ int id performance 0x0
+ int id pin 0x0
+-int id pointer_events 0x0
++int id pointer_enter 0x0
++int id pointer_enter_capture 0x0
++int id pointer_leave 0x0
++int id pointer_leave_capture 0x0
++int id pointer_move 0x0
++int id pointer_move_capture 0x0
+ int id position 0x0
+ int id postLayout 0x0
+ int id pressed 0x0
+@@ -3301,6 +3308,7 @@ int id progress_horizontal 0x0
+ int id radio 0x0
+ int id react_test_id 0x0
+ int id rectangles 0x0
++int id report_drawn 0x0
+ int id reverseSawtooth 0x0
+ int id right 0x0
+ int id rightToLeft 0x0
+@@ -3530,7 +3538,7 @@ int integer react_native_dev_server_port 0x0
+ int integer react_native_inspector_proxy_port 0x0
+ int integer show_password_duration 0x0
+ int integer status_bar_notification_info_maxnum 0x0
+-int integer view_finder_border_width 0x0
++int integer stripe_view_finder_border_width 0x0
+ int interpolator btn_checkbox_checked_mtrl_animation_interpolator_0 0x0
+ int interpolator btn_checkbox_checked_mtrl_animation_interpolator_1 0x0
+ int interpolator btn_checkbox_unchecked_mtrl_animation_interpolator_0 0x0
+@@ -3713,58 +3721,14 @@ int string abc_searchview_description_voice 0x0
+ int string abc_shareactionprovider_share_with 0x0
+ int string abc_shareactionprovider_share_with_application 0x0
+ int string abc_toolbar_collapse_description 0x0
+-int string address_label_address 0x0
+-int string address_label_address_line1 0x0
+-int string address_label_address_line2 0x0
+-int string address_label_ae_emirate 0x0
+-int string address_label_au_suburb_or_city 0x0
+-int string address_label_bb_jm_parish 0x0
+-int string address_label_cedex 0x0
+-int string address_label_city 0x0
+-int string address_label_country 0x0
+-int string address_label_country_or_region 0x0
+-int string address_label_county 0x0
+-int string address_label_department 0x0
+-int string address_label_district 0x0
+-int string address_label_full_name 0x0
+-int string address_label_hk_area 0x0
+-int string address_label_ie_eircode 0x0
+-int string address_label_ie_townland 0x0
+-int string address_label_in_pin 0x0
+-int string address_label_island 0x0
+-int string address_label_jp_prefecture 0x0
+-int string address_label_kr_do_si 0x0
+-int string address_label_name 0x0
+-int string address_label_neighborhood 0x0
+-int string address_label_oblast 0x0
+-int string address_label_phone_number 0x0
+-int string address_label_post_town 0x0
+-int string address_label_postal_code 0x0
+-int string address_label_province 0x0
+-int string address_label_state 0x0
+-int string address_label_suburb 0x0
+-int string address_label_village_township 0x0
+-int string address_label_zip_code 0x0
+-int string address_search_content_description 0x0
+-int string address_zip_invalid 0x0
+-int string address_zip_postal_invalid 0x0
+ int string alert_description 0x0
+-int string app_settings 0x0
+ int string appbar_scrolling_view_behavior 0x0
+-int string back_of_dl 0x0
+-int string back_of_dl_selected 0x0
+-int string back_of_id 0x0
+-int string back_of_id_selected 0x0
+-int string blank_and_required 0x0
+ int string bottom_sheet_behavior 0x0
+ int string bottomsheet_action_collapse 0x0
+ int string bottomsheet_action_expand 0x0
+ int string bottomsheet_action_expand_halfway 0x0
+ int string bottomsheet_drag_handle_clicked 0x0
+ int string bottomsheet_drag_handle_content_description 0x0
+-int string camera_permission 0x0
+-int string camera_permission_rationale 0x0
+-int string capturing 0x0
+ int string catalyst_change_bundle_location 0x0
+ int string catalyst_copy_button 0x0
+ int string catalyst_debug 0x0
+@@ -3795,39 +3759,17 @@ int string catalyst_sample_profiler_disable 0x0
+ int string catalyst_sample_profiler_enable 0x0
+ int string catalyst_settings 0x0
+ int string catalyst_settings_title 0x0
+-int string change 0x0
+ int string character_counter_content_description 0x0
+ int string character_counter_overflowed_content_description 0x0
+ int string character_counter_pattern 0x0
+-int string check_mark 0x0
+-int string choose_file 0x0
+ int string clear_text_end_icon_content_description 0x0
+ int string close_drawer 0x0
+ int string close_sheet 0x0
+ int string combobox_description 0x0
+ int string copy_toast_msg 0x0
+-int string could_not_capture_body1 0x0
+-int string could_not_capture_body2 0x0
+-int string could_not_capture_title 0x0
+-int string country_of_id_number 0x0
+ int string default_error_message 0x0
+ int string default_popup_window_title 0x0
+-int string description_clock 0x0
+-int string description_close 0x0
+-int string description_exclamation 0x0
+-int string description_go_back 0x0
+-int string description_merchant_logo 0x0
+-int string description_plus 0x0
+-int string description_privacy_policy 0x0
+-int string description_stripe_logo 0x0
+-int string description_time_estimate 0x0
+-int string dob 0x0
+-int string dob_placeholder 0x0
+-int string driver_license 0x0
+ int string dropdown_menu 0x0
+-int string email 0x0
+-int string email_is_invalid 0x0
+-int string error 0x0
+ int string error_a11y_label 0x0
+ int string error_icon_content_description 0x0
+ int string exposed_dropdown_menu_content_description 0x0
+@@ -3836,38 +3778,15 @@ int string fab_transformation_sheet_behavior 0x0
+ int string fallback_menu_item_copy_link 0x0
+ int string fallback_menu_item_open_in_browser 0x0
+ int string fallback_menu_item_share_link 0x0
+-int string file_upload 0x0
+-int string file_upload_content_dl 0x0
+-int string file_upload_content_id 0x0
+-int string file_upload_content_passport 0x0
+-int string first_name 0x0
+-int string flash_mask 0x0
+-int string form_label_optional 0x0
+-int string front_of_dl 0x0
+-int string front_of_dl_selected 0x0
+-int string front_of_id 0x0
+-int string front_of_id_selected 0x0
+-int string go_back 0x0
+-int string grant_camera_permission_text 0x0
+ int string header_description 0x0
+ int string hide_bottom_view_on_scroll_behavior 0x0
+-int string hold_still 0x0
+ int string icon_content_description 0x0
+-int string id_card 0x0
+ int string image_description 0x0
+ int string imagebutton_description 0x0
+ int string in_progress 0x0
+-int string incomplete_id_number 0x0
+-int string incomplete_phone_number 0x0
+ int string indeterminate 0x0
+-int string individual_cpf 0x0
+-int string invalid_dob_error 0x0
+ int string item_view_role_description 0x0
+-int string kontinue 0x0
+-int string last_4_of_ssn 0x0
+-int string last_name 0x0
+ int string link_description 0x0
+-int string loading 0x0
+ int string m3_sys_motion_easing_emphasized 0x0
+ int string m3_sys_motion_easing_emphasized_accelerate 0x0
+ int string m3_sys_motion_easing_emphasized_decelerate 0x0
+@@ -3966,45 +3885,28 @@ int string mtrl_switch_track_decoration_path 0x0
+ int string mtrl_switch_track_path 0x0
+ int string mtrl_timepicker_cancel 0x0
+ int string mtrl_timepicker_confirm 0x0
+-int string name 0x0
+ int string nav_app_bar_navigate_up_description 0x0
+ int string nav_app_bar_open_drawer_description 0x0
+ int string navigation_menu 0x0
+ int string not_selected 0x0
+-int string nric_or_fin 0x0
+ int string off 0x0
+-int string ok 0x0
+ int string on 0x0
+-int string passport 0x0
+-int string passport_selected 0x0
+ int string password_toggle_content_description 0x0
+ int string path_password_eye 0x0
+ int string path_password_eye_mask_strike_through 0x0
+ int string path_password_eye_mask_visible 0x0
+ int string path_password_strike_through 0x0
+-int string position_dl_back 0x0
+-int string position_dl_front 0x0
+-int string position_id_back 0x0
+-int string position_id_front 0x0
+-int string position_passport 0x0
+-int string position_selfie 0x0
+ int string progressbar_description 0x0
+ int string radiogroup_description 0x0
+ int string range_end 0x0
+ int string range_start 0x0
+ int string rn_tab_description 0x0
+-int string scanned 0x0
+ int string scrollbar_description 0x0
+ int string search_menu_title 0x0
+ int string searchbar_scrolling_view_behavior 0x0
+ int string searchview_clear_text_content_description 0x0
+ int string searchview_navigation_content_description 0x0
+-int string select 0x0
+ int string selected 0x0
+-int string selfie_capture_complete 0x0
+-int string selfie_captures 0x0
+-int string selfie_item_description 0x0
+-int string selfie_not_saved_warning 0x0
+ int string side_sheet_accessibility_pane_title 0x0
+ int string side_sheet_behavior 0x0
+ int string spinbutton_description 0x0
+@@ -4016,30 +3918,160 @@ int string state_off_description 0x0
+ int string state_on_description 0x0
+ int string state_unselected_description 0x0
+ int string status_bar_notification_info_overflow 0x0
++int string stripe_address_label_address 0x0
++int string stripe_address_label_address_line1 0x0
++int string stripe_address_label_address_line2 0x0
++int string stripe_address_label_ae_emirate 0x0
++int string stripe_address_label_au_suburb_or_city 0x0
++int string stripe_address_label_bb_jm_parish 0x0
++int string stripe_address_label_cedex 0x0
++int string stripe_address_label_city 0x0
++int string stripe_address_label_country 0x0
++int string stripe_address_label_country_or_region 0x0
++int string stripe_address_label_county 0x0
++int string stripe_address_label_department 0x0
++int string stripe_address_label_district 0x0
++int string stripe_address_label_full_name 0x0
++int string stripe_address_label_hk_area 0x0
++int string stripe_address_label_ie_eircode 0x0
++int string stripe_address_label_ie_townland 0x0
++int string stripe_address_label_in_pin 0x0
++int string stripe_address_label_island 0x0
++int string stripe_address_label_jp_prefecture 0x0
++int string stripe_address_label_kr_do_si 0x0
++int string stripe_address_label_name 0x0
++int string stripe_address_label_neighborhood 0x0
++int string stripe_address_label_oblast 0x0
++int string stripe_address_label_phone_number 0x0
++int string stripe_address_label_post_town 0x0
++int string stripe_address_label_postal_code 0x0
++int string stripe_address_label_province 0x0
++int string stripe_address_label_state 0x0
++int string stripe_address_label_suburb 0x0
++int string stripe_address_label_village_township 0x0
++int string stripe_address_label_zip_code 0x0
++int string stripe_address_search_content_description 0x0
++int string stripe_address_zip_invalid 0x0
++int string stripe_address_zip_postal_invalid 0x0
++int string stripe_app_settings 0x0
++int string stripe_back_of_dl 0x0
++int string stripe_back_of_dl_selected 0x0
++int string stripe_back_of_id 0x0
++int string stripe_back_of_id_selected 0x0
++int string stripe_billing_same_as_shipping 0x0
++int string stripe_blank_and_required 0x0
++int string stripe_camera_permission 0x0
+ int string stripe_camera_permission_denied_cancel 0x0
+ int string stripe_camera_permission_denied_message 0x0
+ int string stripe_camera_permission_denied_ok 0x0
++int string stripe_camera_permission_rationale 0x0
++int string stripe_cancelled 0x0
++int string stripe_capturing 0x0
++int string stripe_change 0x0
++int string stripe_check_mark 0x0
++int string stripe_choose_file 0x0
++int string stripe_complete_with_test_data 0x0
++int string stripe_complete_with_test_data_details 0x0
++int string stripe_completed 0x0
++int string stripe_could_not_capture_body1 0x0
++int string stripe_could_not_capture_body2 0x0
++int string stripe_could_not_capture_title 0x0
++int string stripe_description_camera 0x0
++int string stripe_description_clock 0x0
++int string stripe_description_close 0x0
++int string stripe_description_exclamation 0x0
++int string stripe_description_go_back 0x0
++int string stripe_description_merchant_logo 0x0
++int string stripe_description_plus 0x0
++int string stripe_description_privacy_policy 0x0
++int string stripe_description_stripe_logo 0x0
++int string stripe_description_time_estimate 0x0
++int string stripe_dob 0x0
++int string stripe_dob_placeholder 0x0
++int string stripe_driver_license 0x0
++int string stripe_email 0x0
++int string stripe_email_is_invalid 0x0
++int string stripe_error 0x0
+ int string stripe_error_camera_access 0x0
+ int string stripe_error_camera_acknowledge_button 0x0
+ int string stripe_error_camera_open 0x0
+ int string stripe_error_camera_title 0x0
+ int string stripe_error_camera_unsupported 0x0
+-int string stripe_paymentsheet_address_element_same_as_shipping 0x0
++int string stripe_expiration_date_hint 0x0
++int string stripe_failed 0x0
++int string stripe_failure_from_test_mode 0x0
++int string stripe_file_upload 0x0
++int string stripe_file_upload_content_dl 0x0
++int string stripe_file_upload_content_id 0x0
++int string stripe_file_upload_content_passport 0x0
++int string stripe_finish_mobile_flow 0x0
++int string stripe_finish_mobile_flow_details 0x0
++int string stripe_first_name 0x0
++int string stripe_flash_mask 0x0
++int string stripe_form_label_optional 0x0
++int string stripe_front_of_dl 0x0
++int string stripe_front_of_dl_selected 0x0
++int string stripe_front_of_id 0x0
++int string stripe_front_of_id_selected 0x0
++int string stripe_go_back 0x0
++int string stripe_grant_camera_permission_text 0x0
++int string stripe_hold_still 0x0
++int string stripe_id_card 0x0
++int string stripe_id_number 0x0
++int string stripe_incomplete_expiry_date 0x0
++int string stripe_incomplete_id_number 0x0
++int string stripe_incomplete_phone_number 0x0
++int string stripe_individual_cpf 0x0
++int string stripe_invalid_dob_error 0x0
++int string stripe_invalid_expiry_month 0x0
++int string stripe_invalid_expiry_year 0x0
++int string stripe_kontinue 0x0
++int string stripe_last_4_of_ssn 0x0
++int string stripe_last_name 0x0
++int string stripe_loading 0x0
++int string stripe_nric_or_fin 0x0
++int string stripe_ok 0x0
++int string stripe_passport 0x0
++int string stripe_passport_selected 0x0
++int string stripe_position_dl_back 0x0
++int string stripe_position_dl_front 0x0
++int string stripe_position_id_back 0x0
++int string stripe_position_id_front 0x0
++int string stripe_position_passport 0x0
++int string stripe_position_selfie 0x0
++int string stripe_preview_user_experience 0x0
++int string stripe_preview_user_experience_details 0x0
++int string stripe_proceed 0x0
++int string stripe_retake_photos 0x0
++int string stripe_scanned 0x0
++int string stripe_select 0x0
++int string stripe_selfie_capture_complete 0x0
++int string stripe_selfie_captures 0x0
++int string stripe_selfie_item_description 0x0
++int string stripe_selfie_not_saved_warning 0x0
++int string stripe_submit 0x0
++int string stripe_take_photo 0x0
++int string stripe_test_model_content 0x0
++int string stripe_test_model_title 0x0
++int string stripe_try_again 0x0
++int string stripe_unexpected_error_try_again 0x0
++int string stripe_upload_dialog_title_dl_back 0x0
++int string stripe_upload_dialog_title_dl_front 0x0
++int string stripe_upload_dialog_title_id_back 0x0
++int string stripe_upload_dialog_title_id_front 0x0
++int string stripe_upload_dialog_title_passport 0x0
++int string stripe_upload_file_text 0x0
++int string stripe_verification_failure 0x0
++int string stripe_verification_failure_async 0x0
++int string stripe_verification_success 0x0
++int string stripe_verification_success_async 0x0
+ int string summary_description 0x0
++int string switch_role 0x0
+ int string tab 0x0
+ int string tablist_description 0x0
+-int string take_photo 0x0
+ int string template_percent 0x0
+ int string timer_description 0x0
+ int string toolbar_description 0x0
+-int string try_again 0x0
+-int string unexpected_error_try_again 0x0
+-int string upload_dialog_title_dl_back 0x0
+-int string upload_dialog_title_dl_front 0x0
+-int string upload_dialog_title_id_back 0x0
+-int string upload_dialog_title_id_front 0x0
+-int string upload_dialog_title_passport 0x0
+-int string upload_file_text 0x0
+ int style AlertDialog_AppCompat 0x0
+ int style AlertDialog_AppCompat_Light 0x0
+ int style Animation_AppCompat_Dialog 0x0
+@@ -5509,9 +5541,6 @@ int styleable BottomSheetBehavior_Layout_shapeAppearanceOverlay 22
+ int styleable BottomSheetBehavior_Layout_shouldRemoveExpandedCorners 23
+ int[] styleable ButtonBarLayout { 0x0 }
+ int styleable ButtonBarLayout_allowStacking 0
+-int[] styleable CameraView { 0x0, 0x0 }
+-int styleable CameraView_borderDrawable 0
+-int styleable CameraView_viewFinderType 1
+ int[] styleable Capability { 0x0, 0x0 }
+ int styleable Capability_queryPatterns 0
+ int styleable Capability_shortcutMatchRequired 1
+@@ -7062,6 +7091,11 @@ int[] styleable StateListDrawableItem { 0x1010199 }
+ int styleable StateListDrawableItem_android_drawable 0
+ int[] styleable StateSet { 0x0 }
+ int styleable StateSet_defaultState 0
++int[] styleable StripeCameraView { 0x0, 0x0 }
++int styleable StripeCameraView_stripeBorderDrawable 0
++int styleable StripeCameraView_stripeViewFinderType 1
++int[] styleable StripeViewFinderBackground { 0x0 }
++int styleable StripeViewFinderBackground_stripeBackgroundColor 0
+ int[] styleable SwitchCompat { 0x1010125, 0x1010124, 0x1010142, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }
+ int styleable SwitchCompat_android_textOff 0
+ int styleable SwitchCompat_android_textOn 1
+@@ -7360,8 +7394,6 @@ int[] styleable ViewBackgroundHelper { 0x10100d4, 0x0, 0x0 }
+ int styleable ViewBackgroundHelper_android_background 0
+ int styleable ViewBackgroundHelper_backgroundTint 1
+ int styleable ViewBackgroundHelper_backgroundTintMode 2
+-int[] styleable ViewFinderBackground { 0x0 }
+-int styleable ViewFinderBackground_backgroundColor 0
+ int[] styleable ViewPager2 { 0x10100c4 }
+ int styleable ViewPager2_android_orientation 0
+ int[] styleable ViewStubCompat { 0x10100d0, 0x10100f3, 0x10100f2 }
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+index c373f33..6a6ebda 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+@@ -1 +1 @@
+-#Wed Mar 08 11:33:50 PST 2023
++#Thu May 04 11:48:38 PDT 2023
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+index c88d127..722b544 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/debug/packageDebugResources/merger.xml
+@@ -1,2 +1,2 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/android/src/main/res"/><source path="/Users/ccen/stripe/stripe-identity-react-native/android/build/generated/res/rs/debug"/><source path="/Users/ccen/stripe/stripe-identity-react-native/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/android/src/main/res"/><source path="/Users/ccen/stripe/stripe-identity-react-native/android/build/generated/res/rs/debug"/><source path="/Users/ccen/stripe/stripe-identity-react-native/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/android/src/debug/res"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/res"/><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/build/generated/res/rs/debug"/><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/res"/><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/build/generated/res/rs/debug"/><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/build/generated/res/resValues/debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/debug/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/debug/res"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+index fb97349..c10d531 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+@@ -1,2 +1,2 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/android/app/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/android/app/src/debug/jniLibs"/></dataSet></merger>
+\ No newline at end of file
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/jniLibs"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/debug/jniLibs"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugShaders/merger.xml b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+index d976a25..9a8c6f3 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/mergeDebugShaders/merger.xml
+@@ -1,2 +1,2 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/node_modules/react-native-screens/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/node_modules/react-native-screens/android/src/debug/shaders"/></dataSet></merger>
+\ No newline at end of file
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/shaders"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/debug/shaders"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/packageDebugAssets/merger.xml b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+index b7eefc0..1a1f0dc 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/packageDebugAssets/merger.xml
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/incremental/packageDebugAssets/merger.xml
+@@ -1,2 +1,2 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/node_modules/react-native-screens/android/src/main/assets"/><source path="/Users/ccen/stripe/stripe-identity-react-native/example/node_modules/react-native-screens/android/build/intermediates/shader_assets/debug/out"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/stripe/stripe-identity-react-native/example/node_modules/react-native-screens/android/src/debug/assets"/></dataSet></merger>
+\ No newline at end of file
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/assets"/><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/shader_assets/debug/out"/></dataSet><dataSet config="debug" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/debug/assets"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/library_java_res/debug/res.jar b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/library_java_res/debug/res.jar
+index 4a7aac5..c1eb1ef 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/library_java_res/debug/res.jar and b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/library_java_res/debug/res.jar differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+index bde279f..3bdea68 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
+@@ -4,8 +4,8 @@
+ 4
+ 5    <uses-sdk
+ 6        android:minSdkVersion="16"
+-6-->/Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++6-->/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+ 7        android:targetSdkVersion="31" />
+-7-->/Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++7-->/Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+ 8
+ 9</manifest>
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar
+index e7befb5..31e2887 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar and b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
+index d478aba..c3919bc 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
+@@ -208,7 +208,6 @@ attr behavior_saveFlags
+ attr behavior_significantVelocityThreshold
+ attr behavior_skipCollapsed
+ attr blendSrc
+-attr borderDrawable
+ attr borderRound
+ attr borderRoundPercent
+ attr borderWidth
+@@ -1123,6 +1122,9 @@ attr state_with_icon
+ attr statusBarBackground
+ attr statusBarForeground
+ attr statusBarScrim
++attr stripeBackgroundColor
++attr stripeBorderDrawable
++attr stripeViewFinderType
+ attr strokeColor
+ attr strokeWidth
+ attr subMenuArrow
+@@ -1325,7 +1327,6 @@ attr values
+ attr verticalOffset
+ attr verticalOffsetWithText
+ attr viewAspectRatio
+-attr viewFinderType
+ attr viewInflaterClass
+ attr viewTransitionMode
+ attr viewTransitionOnCross
+@@ -1409,7 +1410,6 @@ color cardview_shadow_end_color
+ color cardview_shadow_start_color
+ color catalyst_logbox_background
+ color catalyst_redbox_background
+-color check_mark_background
+ color design_bottom_navigation_shadow_color
+ color design_box_stroke_color
+ color design_dark_default_color_background
+@@ -1454,13 +1454,10 @@ color dim_foreground_material_dark
+ color dim_foreground_material_light
+ color error_color_material_dark
+ color error_color_material_light
+-color error_exclamation_color
+-color flash_mask_color
+ color foreground_material_dark
+ color foreground_material_light
+ color highlighted_text_material_dark
+ color highlighted_text_material_light
+-color id_border_initial_color
+ color m3_appbar_overlay_color
+ color m3_assist_chip_icon_tint_color
+ color m3_assist_chip_stroke_color
+@@ -1984,7 +1981,6 @@ color mtrl_textinput_hovered_box_stroke_color
+ color notification_action_color_filter
+ color notification_icon_bg_color
+ color notification_material_background_media_default_color
+-color plus_icon_tint
+ color primary_dark_material_dark
+ color primary_dark_material_light
+ color primary_material_dark
+@@ -1993,7 +1989,6 @@ color primary_text_default_material_dark
+ color primary_text_default_material_light
+ color primary_text_disabled_material_dark
+ color primary_text_disabled_material_light
+-color privacy_policy_icon_tint
+ color ripple_material_dark
+ color ripple_material_light
+ color secondary_text_default_material_dark
+@@ -2001,18 +1996,24 @@ color secondary_text_default_material_light
+ color secondary_text_disabled_material_dark
+ color secondary_text_disabled_material_light
+ color stripeNotFoundBackground
++color stripe_check_mark_background
++color stripe_error_exclamation_color
++color stripe_flash_mask_color
++color stripe_id_border_initial_color
++color stripe_plus_icon_tint
++color stripe_privacy_policy_icon_tint
++color stripe_time_estimate_icon_tint
++color stripe_viewfinder_border_center
+ color switch_thumb_disabled_material_dark
+ color switch_thumb_disabled_material_light
+ color switch_thumb_material_dark
+ color switch_thumb_material_light
+ color switch_thumb_normal_material_dark
+ color switch_thumb_normal_material_light
+-color time_estimate_icon_tint
+ color tooltip_background_dark
+ color tooltip_background_light
+ color vector_tint_color
+ color vector_tint_theme_color
+-color viewfinder_border_center
+ dimen abc_action_bar_content_inset_material
+ dimen abc_action_bar_content_inset_with_nav
+ dimen abc_action_bar_default_height_material
+@@ -2098,7 +2099,6 @@ dimen appcompat_dialog_background_inset
+ dimen autofill_inline_suggestion_icon_size
+ dimen browser_actions_context_menu_max_width
+ dimen browser_actions_context_menu_min_padding
+-dimen camera_permission_title_text_size
+ dimen cardview_compat_inset_shadow
+ dimen cardview_default_elevation
+ dimen cardview_default_radius
+@@ -2110,7 +2110,6 @@ dimen compat_button_padding_vertical_material
+ dimen compat_control_corner_material
+ dimen compat_notification_large_icon_max_height
+ dimen compat_notification_large_icon_max_width
+-dimen consent_title_text_size
+ dimen def_drawer_elevation
+ dimen design_appbar_elevation
+ dimen design_bottom_navigation_active_item_max_width
+@@ -2162,8 +2161,6 @@ dimen design_tab_text_size_2line
+ dimen design_textinput_caption_translate_y
+ dimen disabled_alpha_material_dark
+ dimen disabled_alpha_material_light
+-dimen doc_selection_title_text_size
+-dimen error_title_text_size
+ dimen fastscroll_default_thickness
+ dimen fastscroll_margin
+ dimen fastscroll_minimum_range
+@@ -2174,11 +2171,9 @@ dimen hint_alpha_material_dark
+ dimen hint_alpha_material_light
+ dimen hint_pressed_alpha_material_dark
+ dimen hint_pressed_alpha_material_light
+-dimen item_horizontal_margin
+ dimen item_touch_helper_max_drag_scroll_per_frame
+ dimen item_touch_helper_swipe_escape_max_velocity
+ dimen item_touch_helper_swipe_escape_velocity
+-dimen item_vertical_margin
+ dimen m3_alert_dialog_action_bottom_padding
+ dimen m3_alert_dialog_action_top_padding
+ dimen m3_alert_dialog_corner_size
+@@ -2729,13 +2724,21 @@ dimen notification_small_icon_size_as_large
+ dimen notification_subtext_size
+ dimen notification_top_pad
+ dimen notification_top_pad_large_text
+-dimen page_horizontal_margin
+-dimen page_vertical_margin
+-dimen scan_title_text_size
+ dimen sliding_pane_detail_pane_width
+ dimen stripeViewFinderHorizontalBias
+ dimen stripeViewFinderMargin
+ dimen stripeViewFinderVerticalBias
++dimen stripe_camera_permission_title_text_size
++dimen stripe_consent_title_text_size
++dimen stripe_doc_selection_title_text_size
++dimen stripe_error_title_text_size
++dimen stripe_item_horizontal_margin
++dimen stripe_item_vertical_margin
++dimen stripe_page_horizontal_margin
++dimen stripe_page_vertical_margin
++dimen stripe_scan_title_text_size
++dimen stripe_upload_title_text_size
++dimen stripe_view_finder_corner_radius
+ dimen subtitle_corner_radius
+ dimen subtitle_outline_width
+ dimen subtitle_shadow_offset
+@@ -2748,8 +2751,6 @@ dimen tooltip_precise_anchor_threshold
+ dimen tooltip_vertical_padding
+ dimen tooltip_y_offset_non_touch
+ dimen tooltip_y_offset_touch
+-dimen upload_title_text_size
+-dimen view_finder_corner_radius
+ drawable abc_ab_share_pack_mtrl_alpha
+ drawable abc_action_bar_item_background_material
+ drawable abc_btn_borderless_material
+@@ -2852,20 +2853,14 @@ drawable btn_radio_off_mtrl
+ drawable btn_radio_off_to_on_mtrl_animation
+ drawable btn_radio_on_mtrl
+ drawable btn_radio_on_to_off_mtrl_animation
+-drawable check_mark
+-drawable clock_icon
+ drawable design_fab_background
+ drawable design_ic_visibility
+ drawable design_ic_visibility_off
+ drawable design_password_eye
+ drawable design_snackbar_background
+ drawable ic_arrow_back_black_24
+-drawable ic_baseline_arrow_back_24
+-drawable ic_baseline_close_24
+-drawable ic_chevron_down
+ drawable ic_clear_black_24
+ drawable ic_clock_black_24dp
+-drawable ic_exclamation
+ drawable ic_keyboard_black_24dp
+ drawable ic_m3_chip_check
+ drawable ic_m3_chip_checked_circle
+@@ -2875,7 +2870,6 @@ drawable ic_mtrl_chip_checked_black
+ drawable ic_mtrl_chip_checked_circle
+ drawable ic_mtrl_chip_close_circle
+ drawable ic_search_black_24
+-drawable ic_stripe_square_32
+ drawable m3_appbar_background
+ drawable m3_avd_hide_password
+ drawable m3_avd_show_password
+@@ -2947,17 +2941,25 @@ drawable notification_template_icon_bg
+ drawable notification_template_icon_low_bg
+ drawable notification_tile_bg
+ drawable notify_panel_notification_icon_bg
+-drawable plus_icon
+-drawable privacy_policy_icon
+ drawable redbox_top_border_background
++drawable stripe_arrow_back
++drawable stripe_camera_icon
++drawable stripe_check_mark
++drawable stripe_clock_icon
++drawable stripe_close
++drawable stripe_exclamation
++drawable stripe_ic_chevron_down
+ drawable stripe_ic_search
++drawable stripe_plus_icon
++drawable stripe_privacy_policy_icon
++drawable stripe_square
++drawable stripe_time_estimate_icon
++drawable stripe_viewfinder_background
++drawable stripe_viewfinder_border_found
++drawable stripe_viewfinder_border_initial
+ drawable test_level_drawable
+-drawable time_estimate_icon
+ drawable tooltip_frame_dark
+ drawable tooltip_frame_light
+-drawable viewfinder_background
+-drawable viewfinder_border_found
+-drawable viewfinder_border_initial
+ id BOTTOM_END
+ id BOTTOM_START
+ id NO_DEBUG
+@@ -3293,7 +3295,12 @@ id pathRelative
+ id percent
+ id performance
+ id pin
+-id pointer_events
++id pointer_enter
++id pointer_enter_capture
++id pointer_leave
++id pointer_leave_capture
++id pointer_move
++id pointer_move_capture
+ id position
+ id postLayout
+ id pressed
+@@ -3302,6 +3309,7 @@ id progress_horizontal
+ id radio
+ id react_test_id
+ id rectangles
++id report_drawn
+ id reverseSawtooth
+ id right
+ id rightToLeft
+@@ -3531,7 +3539,7 @@ integer react_native_dev_server_port
+ integer react_native_inspector_proxy_port
+ integer show_password_duration
+ integer status_bar_notification_info_maxnum
+-integer view_finder_border_width
++integer stripe_view_finder_border_width
+ interpolator btn_checkbox_checked_mtrl_animation_interpolator_0
+ interpolator btn_checkbox_checked_mtrl_animation_interpolator_1
+ interpolator btn_checkbox_unchecked_mtrl_animation_interpolator_0
+@@ -3714,58 +3722,14 @@ string abc_searchview_description_voice
+ string abc_shareactionprovider_share_with
+ string abc_shareactionprovider_share_with_application
+ string abc_toolbar_collapse_description
+-string address_label_address
+-string address_label_address_line1
+-string address_label_address_line2
+-string address_label_ae_emirate
+-string address_label_au_suburb_or_city
+-string address_label_bb_jm_parish
+-string address_label_cedex
+-string address_label_city
+-string address_label_country
+-string address_label_country_or_region
+-string address_label_county
+-string address_label_department
+-string address_label_district
+-string address_label_full_name
+-string address_label_hk_area
+-string address_label_ie_eircode
+-string address_label_ie_townland
+-string address_label_in_pin
+-string address_label_island
+-string address_label_jp_prefecture
+-string address_label_kr_do_si
+-string address_label_name
+-string address_label_neighborhood
+-string address_label_oblast
+-string address_label_phone_number
+-string address_label_post_town
+-string address_label_postal_code
+-string address_label_province
+-string address_label_state
+-string address_label_suburb
+-string address_label_village_township
+-string address_label_zip_code
+-string address_search_content_description
+-string address_zip_invalid
+-string address_zip_postal_invalid
+ string alert_description
+-string app_settings
+ string appbar_scrolling_view_behavior
+-string back_of_dl
+-string back_of_dl_selected
+-string back_of_id
+-string back_of_id_selected
+-string blank_and_required
+ string bottom_sheet_behavior
+ string bottomsheet_action_collapse
+ string bottomsheet_action_expand
+ string bottomsheet_action_expand_halfway
+ string bottomsheet_drag_handle_clicked
+ string bottomsheet_drag_handle_content_description
+-string camera_permission
+-string camera_permission_rationale
+-string capturing
+ string catalyst_change_bundle_location
+ string catalyst_copy_button
+ string catalyst_debug
+@@ -3796,39 +3760,17 @@ string catalyst_sample_profiler_disable
+ string catalyst_sample_profiler_enable
+ string catalyst_settings
+ string catalyst_settings_title
+-string change
+ string character_counter_content_description
+ string character_counter_overflowed_content_description
+ string character_counter_pattern
+-string check_mark
+-string choose_file
+ string clear_text_end_icon_content_description
+ string close_drawer
+ string close_sheet
+ string combobox_description
+ string copy_toast_msg
+-string could_not_capture_body1
+-string could_not_capture_body2
+-string could_not_capture_title
+-string country_of_id_number
+ string default_error_message
+ string default_popup_window_title
+-string description_clock
+-string description_close
+-string description_exclamation
+-string description_go_back
+-string description_merchant_logo
+-string description_plus
+-string description_privacy_policy
+-string description_stripe_logo
+-string description_time_estimate
+-string dob
+-string dob_placeholder
+-string driver_license
+ string dropdown_menu
+-string email
+-string email_is_invalid
+-string error
+ string error_a11y_label
+ string error_icon_content_description
+ string exposed_dropdown_menu_content_description
+@@ -3837,38 +3779,15 @@ string fab_transformation_sheet_behavior
+ string fallback_menu_item_copy_link
+ string fallback_menu_item_open_in_browser
+ string fallback_menu_item_share_link
+-string file_upload
+-string file_upload_content_dl
+-string file_upload_content_id
+-string file_upload_content_passport
+-string first_name
+-string flash_mask
+-string form_label_optional
+-string front_of_dl
+-string front_of_dl_selected
+-string front_of_id
+-string front_of_id_selected
+-string go_back
+-string grant_camera_permission_text
+ string header_description
+ string hide_bottom_view_on_scroll_behavior
+-string hold_still
+ string icon_content_description
+-string id_card
+ string image_description
+ string imagebutton_description
+ string in_progress
+-string incomplete_id_number
+-string incomplete_phone_number
+ string indeterminate
+-string individual_cpf
+-string invalid_dob_error
+ string item_view_role_description
+-string kontinue
+-string last_4_of_ssn
+-string last_name
+ string link_description
+-string loading
+ string m3_sys_motion_easing_emphasized
+ string m3_sys_motion_easing_emphasized_accelerate
+ string m3_sys_motion_easing_emphasized_decelerate
+@@ -3967,45 +3886,28 @@ string mtrl_switch_track_decoration_path
+ string mtrl_switch_track_path
+ string mtrl_timepicker_cancel
+ string mtrl_timepicker_confirm
+-string name
+ string nav_app_bar_navigate_up_description
+ string nav_app_bar_open_drawer_description
+ string navigation_menu
+ string not_selected
+-string nric_or_fin
+ string off
+-string ok
+ string on
+-string passport
+-string passport_selected
+ string password_toggle_content_description
+ string path_password_eye
+ string path_password_eye_mask_strike_through
+ string path_password_eye_mask_visible
+ string path_password_strike_through
+-string position_dl_back
+-string position_dl_front
+-string position_id_back
+-string position_id_front
+-string position_passport
+-string position_selfie
+ string progressbar_description
+ string radiogroup_description
+ string range_end
+ string range_start
+ string rn_tab_description
+-string scanned
+ string scrollbar_description
+ string search_menu_title
+ string searchbar_scrolling_view_behavior
+ string searchview_clear_text_content_description
+ string searchview_navigation_content_description
+-string select
+ string selected
+-string selfie_capture_complete
+-string selfie_captures
+-string selfie_item_description
+-string selfie_not_saved_warning
+ string side_sheet_accessibility_pane_title
+ string side_sheet_behavior
+ string spinbutton_description
+@@ -4017,30 +3919,160 @@ string state_off_description
+ string state_on_description
+ string state_unselected_description
+ string status_bar_notification_info_overflow
++string stripe_address_label_address
++string stripe_address_label_address_line1
++string stripe_address_label_address_line2
++string stripe_address_label_ae_emirate
++string stripe_address_label_au_suburb_or_city
++string stripe_address_label_bb_jm_parish
++string stripe_address_label_cedex
++string stripe_address_label_city
++string stripe_address_label_country
++string stripe_address_label_country_or_region
++string stripe_address_label_county
++string stripe_address_label_department
++string stripe_address_label_district
++string stripe_address_label_full_name
++string stripe_address_label_hk_area
++string stripe_address_label_ie_eircode
++string stripe_address_label_ie_townland
++string stripe_address_label_in_pin
++string stripe_address_label_island
++string stripe_address_label_jp_prefecture
++string stripe_address_label_kr_do_si
++string stripe_address_label_name
++string stripe_address_label_neighborhood
++string stripe_address_label_oblast
++string stripe_address_label_phone_number
++string stripe_address_label_post_town
++string stripe_address_label_postal_code
++string stripe_address_label_province
++string stripe_address_label_state
++string stripe_address_label_suburb
++string stripe_address_label_village_township
++string stripe_address_label_zip_code
++string stripe_address_search_content_description
++string stripe_address_zip_invalid
++string stripe_address_zip_postal_invalid
++string stripe_app_settings
++string stripe_back_of_dl
++string stripe_back_of_dl_selected
++string stripe_back_of_id
++string stripe_back_of_id_selected
++string stripe_billing_same_as_shipping
++string stripe_blank_and_required
++string stripe_camera_permission
+ string stripe_camera_permission_denied_cancel
+ string stripe_camera_permission_denied_message
+ string stripe_camera_permission_denied_ok
++string stripe_camera_permission_rationale
++string stripe_cancelled
++string stripe_capturing
++string stripe_change
++string stripe_check_mark
++string stripe_choose_file
++string stripe_complete_with_test_data
++string stripe_complete_with_test_data_details
++string stripe_completed
++string stripe_could_not_capture_body1
++string stripe_could_not_capture_body2
++string stripe_could_not_capture_title
++string stripe_description_camera
++string stripe_description_clock
++string stripe_description_close
++string stripe_description_exclamation
++string stripe_description_go_back
++string stripe_description_merchant_logo
++string stripe_description_plus
++string stripe_description_privacy_policy
++string stripe_description_stripe_logo
++string stripe_description_time_estimate
++string stripe_dob
++string stripe_dob_placeholder
++string stripe_driver_license
++string stripe_email
++string stripe_email_is_invalid
++string stripe_error
+ string stripe_error_camera_access
+ string stripe_error_camera_acknowledge_button
+ string stripe_error_camera_open
+ string stripe_error_camera_title
+ string stripe_error_camera_unsupported
+-string stripe_paymentsheet_address_element_same_as_shipping
++string stripe_expiration_date_hint
++string stripe_failed
++string stripe_failure_from_test_mode
++string stripe_file_upload
++string stripe_file_upload_content_dl
++string stripe_file_upload_content_id
++string stripe_file_upload_content_passport
++string stripe_finish_mobile_flow
++string stripe_finish_mobile_flow_details
++string stripe_first_name
++string stripe_flash_mask
++string stripe_form_label_optional
++string stripe_front_of_dl
++string stripe_front_of_dl_selected
++string stripe_front_of_id
++string stripe_front_of_id_selected
++string stripe_go_back
++string stripe_grant_camera_permission_text
++string stripe_hold_still
++string stripe_id_card
++string stripe_id_number
++string stripe_incomplete_expiry_date
++string stripe_incomplete_id_number
++string stripe_incomplete_phone_number
++string stripe_individual_cpf
++string stripe_invalid_dob_error
++string stripe_invalid_expiry_month
++string stripe_invalid_expiry_year
++string stripe_kontinue
++string stripe_last_4_of_ssn
++string stripe_last_name
++string stripe_loading
++string stripe_nric_or_fin
++string stripe_ok
++string stripe_passport
++string stripe_passport_selected
++string stripe_position_dl_back
++string stripe_position_dl_front
++string stripe_position_id_back
++string stripe_position_id_front
++string stripe_position_passport
++string stripe_position_selfie
++string stripe_preview_user_experience
++string stripe_preview_user_experience_details
++string stripe_proceed
++string stripe_retake_photos
++string stripe_scanned
++string stripe_select
++string stripe_selfie_capture_complete
++string stripe_selfie_captures
++string stripe_selfie_item_description
++string stripe_selfie_not_saved_warning
++string stripe_submit
++string stripe_take_photo
++string stripe_test_model_content
++string stripe_test_model_title
++string stripe_try_again
++string stripe_unexpected_error_try_again
++string stripe_upload_dialog_title_dl_back
++string stripe_upload_dialog_title_dl_front
++string stripe_upload_dialog_title_id_back
++string stripe_upload_dialog_title_id_front
++string stripe_upload_dialog_title_passport
++string stripe_upload_file_text
++string stripe_verification_failure
++string stripe_verification_failure_async
++string stripe_verification_success
++string stripe_verification_success_async
+ string summary_description
++string switch_role
+ string tab
+ string tablist_description
+-string take_photo
+ string template_percent
+ string timer_description
+ string toolbar_description
+-string try_again
+-string unexpected_error_try_again
+-string upload_dialog_title_dl_back
+-string upload_dialog_title_dl_front
+-string upload_dialog_title_id_back
+-string upload_dialog_title_id_front
+-string upload_dialog_title_passport
+-string upload_file_text
+ style AlertDialog_AppCompat
+ style AlertDialog_AppCompat_Light
+ style Animation_AppCompat_Dialog
+@@ -5194,7 +5226,6 @@ styleable BottomAppBar addElevationShadow backgroundTint elevation fabAlignmentM
+ styleable BottomNavigationView android_minHeight compatShadowEnabled itemHorizontalTranslationEnabled
+ styleable BottomSheetBehavior_Layout android_elevation android_maxHeight android_maxWidth backgroundTint behavior_draggable behavior_expandedOffset behavior_fitToContents behavior_halfExpandedRatio behavior_hideable behavior_peekHeight behavior_saveFlags behavior_significantVelocityThreshold behavior_skipCollapsed gestureInsetBottomIgnored marginLeftSystemWindowInsets marginRightSystemWindowInsets marginTopSystemWindowInsets paddingBottomSystemWindowInsets paddingLeftSystemWindowInsets paddingRightSystemWindowInsets paddingTopSystemWindowInsets shapeAppearance shapeAppearanceOverlay shouldRemoveExpandedCorners
+ styleable ButtonBarLayout allowStacking
+-styleable CameraView borderDrawable viewFinderType
+ styleable Capability queryPatterns shortcutMatchRequired
+ styleable CardView android_minHeight android_minWidth cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
+ styleable Carousel carousel_backwardTransition carousel_emptyViewsBehavior carousel_firstView carousel_forwardTransition carousel_infinite carousel_nextState carousel_previousState carousel_touchUpMode carousel_touchUp_dampeningFactor carousel_touchUp_velocityThreshold
+@@ -5316,6 +5347,8 @@ styleable State android_id constraints
+ styleable StateListDrawable android_constantSize android_dither android_enterFadeDuration android_exitFadeDuration android_variablePadding android_visible
+ styleable StateListDrawableItem android_drawable
+ styleable StateSet defaultState
++styleable StripeCameraView stripeBorderDrawable stripeViewFinderType
++styleable StripeViewFinderBackground stripeBackgroundColor
+ styleable SwitchCompat android_textOff android_textOn android_thumb showText splitTrack switchMinWidth switchPadding switchTextAppearance thumbTextPadding thumbTint thumbTintMode track trackTint trackTintMode
+ styleable SwitchMaterial useMaterialThemeColors
+ styleable TabItem android_icon android_layout android_text
+@@ -5335,7 +5368,6 @@ styleable Transition android_id autoTransition constraintSetEnd constraintSetSta
+ styleable Variant constraints region_heightLessThan region_heightMoreThan region_widthLessThan region_widthMoreThan
+ styleable View android_focusable android_theme paddingEnd paddingStart theme
+ styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
+-styleable ViewFinderBackground backgroundColor
+ styleable ViewPager2 android_orientation
+ styleable ViewStubCompat android_id android_inflatedId android_layout
+ styleable ViewTransition SharedValue SharedValueId android_id clearsTag duration ifTagNotSet ifTagSet motionInterpolator motionTarget onStateTransition pathMotionArc setsTag transitionDisable upDuration viewTransitionMode
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/build-history.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/build-history.bin
+new file mode 100644
+index 0000000..a3ae059
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/build-history.bin differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab
+index b5d521f..aabba89 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream
+index 0feeccc..c527a3b 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len
+index 05a9bff..4674eb3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
+index 4948b34..a7b3bc8 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i
+index 25d0312..9c513dd 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/inputs/source-to-output.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab
+index e8e265c..ce71502 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at
+index d89ba7a..fe23964 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-attributes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab
+index f2aa652..caa5827 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at
+index 07f32df..bd59c9f 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab
+index f76e544..771487e 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at
+index 7623a8f..74e6ff8 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab
+index f17224d..6ea230b 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at
+index bbea839..e4728b3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/proto.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab
+index 3fa5677..43eb759 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream
+index 26442fc..bf8d18a 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len
+index 05a9bff..4674eb3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at
+index 4b86214..e9b600e 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i
+index 28a42ca..6d376c3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/source-to-classes.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab
+index 3099540..a355367 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at
+index 877fca1..e1f1ad2 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/subtypes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab
+index 4c848b3..4a5eec3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at
+index 8151f75..56f8b40 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/supertypes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+index 3d952e7..26d3b09 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+@@ -1,2 +1,2 @@
+-7
++4
+ 0
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab
+index 699b333..330c2b0 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream
+index 26442fc..bf8d18a 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len
+index 05a9bff..4674eb3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at
+index 25454f3..3e23c2a 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i
+index 2152786..28865d5 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/file-to-id.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab
+index 14d3624..d7f02ba 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream
+index 2459ed6..6e7a926 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len
+index 379d85c..eb52963 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len
+index 817b326..93a595b 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at
+index f590019..d2d1a2a 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i
+index 0667ccd..6936967 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/id-to-file.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab
+index 12397a7..5da9db6 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream
+index a6dbe71..82264cb 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len
+index 38c649b..191030b 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len
+index d444d97..7c61bc2 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at
+index 1ba7f11..04bbedb 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i
+index 8bd201e..d457ed3 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/lookups.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin
+index 629e833..7c9252a 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/cacheable/last-build.bin differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab
+new file mode 100644
+index 0000000..33e53f3
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream
+new file mode 100644
+index 0000000..0feeccc
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len
+new file mode 100644
+index 0000000..05a9bff
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.len
+new file mode 100644
+index 0000000..93a595b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.values.at
+new file mode 100644
+index 0000000..3806265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i
+new file mode 100644
+index 0000000..25d0312
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/inputs/source-to-output.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab
+new file mode 100644
+index 0000000..ce71502
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream
+new file mode 100644
+index 0000000..94a2c46
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len
+new file mode 100644
+index 0000000..4445403
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.values.at
+new file mode 100644
+index 0000000..fe23964
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i
+new file mode 100644
+index 0000000..8e48a95
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-attributes.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab
+new file mode 100644
+index 0000000..892ccdf
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream
+new file mode 100644
+index 0000000..94a2c46
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000..4445403
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at
+new file mode 100644
+index 0000000..944138c
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i
+new file mode 100644
+index 0000000..8e48a95
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/class-fq-name-to-source.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab
+new file mode 100644
+index 0000000..3608bdc
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream
+new file mode 100644
+index 0000000..1a32df1
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len
+new file mode 100644
+index 0000000..23c4955
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len
+new file mode 100644
+index 0000000..9e27f73
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at
+new file mode 100644
+index 0000000..f72a31a
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i
+new file mode 100644
+index 0000000..27bdf46
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/internal-name-to-source.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab
+new file mode 100644
+index 0000000..bdf584a
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream
+new file mode 100644
+index 0000000..08d863e
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len
+new file mode 100644
+index 0000000..dfa34aa
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len
+new file mode 100644
+index 0000000..2a17e6e
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.values.at
+new file mode 100644
+index 0000000..46d6744
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i
+new file mode 100644
+index 0000000..61187a6
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/package-parts.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab
+new file mode 100644
+index 0000000..80a81a8
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream
+new file mode 100644
+index 0000000..25fa80e
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len
+new file mode 100644
+index 0000000..9d30930
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.len
+new file mode 100644
+index 0000000..ec8f944
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at
+new file mode 100644
+index 0000000..c350c84
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i
+new file mode 100644
+index 0000000..03dcde4
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/proto.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab
+new file mode 100644
+index 0000000..96e16fd
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream
+new file mode 100644
+index 0000000..26442fc
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len
+new file mode 100644
+index 0000000..05a9bff
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len
+new file mode 100644
+index 0000000..93a595b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at
+new file mode 100644
+index 0000000..e9b600e
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i
+new file mode 100644
+index 0000000..28a42ca
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab
+new file mode 100644
+index 0000000..a355367
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream
+new file mode 100644
+index 0000000..9948d6d
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len
+new file mode 100644
+index 0000000..047ea2d
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at
+new file mode 100644
+index 0000000..e1f1ad2
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i
+new file mode 100644
+index 0000000..23f4e09
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/subtypes.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab
+new file mode 100644
+index 0000000..4a5eec3
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream
+new file mode 100644
+index 0000000..94a2c46
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len
+new file mode 100644
+index 0000000..4445403
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.len
+new file mode 100644
+index 0000000..a9f80ae
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at
+new file mode 100644
+index 0000000..56f8b40
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i
+new file mode 100644
+index 0000000..8e48a95
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/jvm/kotlin/supertypes.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/counters.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/counters.tab
+new file mode 100644
+index 0000000..26d3b09
+--- /dev/null
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/counters.tab
+@@ -0,0 +1,2 @@
++4
++0
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab
+new file mode 100644
+index 0000000..5dfcb0b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream
+new file mode 100644
+index 0000000..26442fc
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len
+new file mode 100644
+index 0000000..05a9bff
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.len
+new file mode 100644
+index 0000000..93a595b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.values.at
+new file mode 100644
+index 0000000..3e23c2a
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i
+new file mode 100644
+index 0000000..2152786
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/file-to-id.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab
+new file mode 100644
+index 0000000..d1465cb
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream
+new file mode 100644
+index 0000000..6e7a926
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len
+new file mode 100644
+index 0000000..eb52963
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.len
+new file mode 100644
+index 0000000..93a595b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.values.at
+new file mode 100644
+index 0000000..5aae351
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i
+new file mode 100644
+index 0000000..6936967
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/id-to-file.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab
+new file mode 100644
+index 0000000..225da7a
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream
+new file mode 100644
+index 0000000..02739d1
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream.len
+new file mode 100644
+index 0000000..f4d0b18
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.keystream.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.len
+new file mode 100644
+index 0000000..152e1f8
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.values.at b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.values.at
+new file mode 100644
+index 0000000..1730e5b
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab.values.at differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i
+new file mode 100644
+index 0000000..bdd9005
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i.len b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i.len
+new file mode 100644
+index 0000000..131e265
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/caches-jvm/lookups/lookups.tab_i.len differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/last-build.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/last-build.bin
+new file mode 100644
+index 0000000..5a476dc
+Binary files /dev/null and b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/last-build.bin differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin
+deleted file mode 100644
+index df22c8d..0000000
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/kotlin/compileDebugKotlin/local-state/build-history.bin and /dev/null differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/outputs/logs/manifest-merger-debug-report.txt b/node_modules/@stripe/stripe-identity-react-native/android/build/outputs/logs/manifest-merger-debug-report.txt
+index c762c24..f501b35 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/build/outputs/logs/manifest-merger-debug-report.txt
++++ b/node_modules/@stripe/stripe-identity-react-native/android/build/outputs/logs/manifest-merger-debug-report.txt
+@@ -1,25 +1,25 @@
+ -- Merging decision tree log ---
+ manifest
+-ADDED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
++ADDED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:1-4:12
+ 	package
+-		ADDED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:2:11-50
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		ADDED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:2:11-50
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+ 	xmlns:android
+-		ADDED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:11-69
++		ADDED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml:1:11-69
+ uses-sdk
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+ 	android:targetSdkVersion
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-		ADDED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		ADDED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+ 	android:minSdkVersion
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-		ADDED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+-		INJECTED from /Users/ccen/stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		ADDED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
++		INJECTED from /Users/ccen/reactNativeToys/IdentityRNTest/node_modules/@stripe/stripe-identity-react-native/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
+index 393fb15..8643c5f 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/META-INF/stripeidentityreactnative_debug.kotlin_module b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/META-INF/stripe_stripe-identity-react-native_debug.kotlin_module
+similarity index 100%
+rename from node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/META-INF/stripeidentityreactnative_debug.kotlin_module
+rename to node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/META-INF/stripe_stripe-identity-react-native_debug.kotlin_module
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/MappersKt.class b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/MappersKt.class
+index 7a40ea4..4598062 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/MappersKt.class and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/MappersKt.class differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule$mActivityEventListener$1.class b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule$mActivityEventListener$1.class
+index 095dc4f..c751e55 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule$mActivityEventListener$1.class and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule$mActivityEventListener$1.class differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule.class b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule.class
+index 9efa1f8..a07307f 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule.class and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativeModule.class differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativePackage.class b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativePackage.class
+index b87be86..91b20e9 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativePackage.class and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityReactNativePackage.class differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityVerificationSheetFragment.class b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityVerificationSheetFragment.class
+index 605bcac..bdf597e 100644
+Binary files a/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityVerificationSheetFragment.class and b/node_modules/@stripe/stripe-identity-react-native/android/build/tmp/kotlin-classes/debug/com/stripeidentityreactnative/StripeIdentityVerificationSheetFragment.class differ
+diff --git a/node_modules/@stripe/stripe-identity-react-native/android/gradle.properties b/node_modules/@stripe/stripe-identity-react-native/android/gradle.properties
+index cf05427..ec3ff9b 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/android/gradle.properties
++++ b/node_modules/@stripe/stripe-identity-react-native/android/gradle.properties
+@@ -1,3 +1,5 @@
++# When StripeIdentityReactNative_kotlinVersion and StripeIdentityReactNative_stripeVersion is updated, also need to update StripeSdk_kotlinVersion and StripeSdk_stripeVersion in https://github.com/stripe/stripe-react-native/blob/master/android/gradle.properties
+ StripeIdentityReactNative_kotlinVersion=1.8.0
++StripeIdentityReactNative_stripeVersion=20.24.2
+ StripeIdentityReactNative_compileSdkVersion=31
+ StripeIdentityReactNative_targetSdkVersion=31
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js
+index 1de1214..e083a70 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js
+@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.default = void 0;
+-
+ var _reactNative = require("react-native");
+-
+ const LINKING_ERROR = `The package 'stripe-identity-react-native' doesn't seem to be linked. Make sure: \n\n` + _reactNative.Platform.select({
+   ios: "- You have run 'pod install'\n",
+   default: ''
+@@ -15,7 +13,6 @@ const StripeIdentityReactNative = _reactNative.NativeModules.StripeIdentityReact
+   get() {
+     throw new Error(LINKING_ERROR);
+   }
+-
+ });
+ var _default = StripeIdentityReactNative;
+ exports.default = _default;
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js.map
+index a636e53..a67ca60 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/StripeIdentitySdk.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["StripeIdentitySdk.tsx"],"names":["LINKING_ERROR","Platform","select","ios","default","StripeIdentityReactNative","NativeModules","Proxy","get","Error"],"mappings":";;;;;;;AAAA;;AAMA,MAAMA,aAAa,GAChB,uFAAD,GACAC,sBAASC,MAAT,CAAgB;AAAEC,EAAAA,GAAG,EAAE,gCAAP;AAAyCC,EAAAA,OAAO,EAAE;AAAlD,CAAhB,CADA,GAEA,sDAFA,GAGA,6CAJF;AAMA,MAAMC,yBAAyB,GAAGC,2BAAcD,yBAAd,GAC9BC,2BAAcD,yBADgB,GAE9B,IAAIE,KAAJ,CACE,EADF,EAEE;AACEC,EAAAA,GAAG,GAAG;AACJ,UAAM,IAAIC,KAAJ,CAAUT,aAAV,CAAN;AACD;;AAHH,CAFF,CAFJ;eAgBeK,yB","sourcesContent":["import { NativeModules, Platform } from 'react-native';\nimport type {\n  InitIdentityVerificationSheet,\n  PresentIdentityVerificationSheet,\n} from './types';\n\nconst LINKING_ERROR =\n  `The package 'stripe-identity-react-native' doesn't seem to be linked. Make sure: \\n\\n` +\n  Platform.select({ ios: \"- You have run 'pod install'\\n\", default: '' }) +\n  '- You rebuilt the app after installing the package\\n' +\n  '- You are not using Expo managed workflow\\n';\n\nconst StripeIdentityReactNative = NativeModules.StripeIdentityReactNative\n  ? NativeModules.StripeIdentityReactNative\n  : new Proxy(\n      {},\n      {\n        get() {\n          throw new Error(LINKING_ERROR);\n        },\n      }\n    );\n\ntype StripeIdentitySdkType = {\n  initIdentityVerificationSheet: InitIdentityVerificationSheet;\n  presentIdentityVerificationSheet: PresentIdentityVerificationSheet;\n};\n\nexport default StripeIdentityReactNative as StripeIdentitySdkType;\n"]}
+\ No newline at end of file
++{"version":3,"names":["_reactNative","require","LINKING_ERROR","Platform","select","ios","default","StripeIdentityReactNative","NativeModules","Proxy","get","Error","_default","exports"],"sources":["StripeIdentitySdk.tsx"],"sourcesContent":["import { NativeModules, Platform } from 'react-native';\nimport type {\n  InitIdentityVerificationSheet,\n  PresentIdentityVerificationSheet,\n} from './types';\n\nconst LINKING_ERROR =\n  `The package 'stripe-identity-react-native' doesn't seem to be linked. Make sure: \\n\\n` +\n  Platform.select({ ios: \"- You have run 'pod install'\\n\", default: '' }) +\n  '- You rebuilt the app after installing the package\\n' +\n  '- You are not using Expo managed workflow\\n';\n\nconst StripeIdentityReactNative = NativeModules.StripeIdentityReactNative\n  ? NativeModules.StripeIdentityReactNative\n  : new Proxy(\n      {},\n      {\n        get() {\n          throw new Error(LINKING_ERROR);\n        },\n      }\n    );\n\ntype StripeIdentitySdkType = {\n  initIdentityVerificationSheet: InitIdentityVerificationSheet;\n  presentIdentityVerificationSheet: PresentIdentityVerificationSheet;\n};\n\nexport default StripeIdentityReactNative as StripeIdentitySdkType;\n"],"mappings":";;;;;;AAAA,IAAAA,YAAA,GAAAC,OAAA;AAMA,MAAMC,aAAa,GAChB,uFAAsF,GACvFC,qBAAQ,CAACC,MAAM,CAAC;EAAEC,GAAG,EAAE,gCAAgC;EAAEC,OAAO,EAAE;AAAG,CAAC,CAAC,GACvE,sDAAsD,GACtD,6CAA6C;AAE/C,MAAMC,yBAAyB,GAAGC,0BAAa,CAACD,yBAAyB,GACrEC,0BAAa,CAACD,yBAAyB,GACvC,IAAIE,KAAK,CACP,CAAC,CAAC,EACF;EACEC,GAAGA,CAAA,EAAG;IACJ,MAAM,IAAIC,KAAK,CAACT,aAAa,CAAC;EAChC;AACF,CAAC,CACF;AAAC,IAAAU,QAAA,GAOSL,yBAAyB;AAAAM,OAAA,CAAAP,OAAA,GAAAM,QAAA"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js
+index 0c45a8d..1dcebdd 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js
+@@ -4,11 +4,8 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.presentIdentityVerificationSheet = presentIdentityVerificationSheet;
+-
+ var _StripeIdentitySdk = _interopRequireDefault(require("./StripeIdentitySdk"));
+-
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+-
+ async function presentIdentityVerificationSheet(options) {
+   await _StripeIdentitySdk.default.initIdentityVerificationSheet(options);
+   return await _StripeIdentitySdk.default.presentIdentityVerificationSheet();
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js.map
+index 2dfcd47..9f5b412 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/functions.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["functions.ts"],"names":["presentIdentityVerificationSheet","options","StripeIdentityReactNative","initIdentityVerificationSheet"],"mappings":";;;;;;;AAAA;;;;AAMO,eAAeA,gCAAf,CACLC,OADK,EAEqC;AAC1C,QAAMC,2BAA0BC,6BAA1B,CAAwDF,OAAxD,CAAN;AACA,SAAO,MAAMC,2BAA0BF,gCAA1B,EAAb;AACD","sourcesContent":["import StripeIdentityReactNative from './StripeIdentitySdk';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n} from './types';\n\nexport async function presentIdentityVerificationSheet(\n  options: IdentityVerificationSheetOptions\n): Promise<IdentityVerificationSheetResult> {\n  await StripeIdentityReactNative.initIdentityVerificationSheet(options);\n  return await StripeIdentityReactNative.presentIdentityVerificationSheet();\n}\n"]}
+\ No newline at end of file
++{"version":3,"names":["_StripeIdentitySdk","_interopRequireDefault","require","obj","__esModule","default","presentIdentityVerificationSheet","options","StripeIdentityReactNative","initIdentityVerificationSheet"],"sources":["functions.ts"],"sourcesContent":["import StripeIdentityReactNative from './StripeIdentitySdk';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n} from './types';\n\nexport async function presentIdentityVerificationSheet(\n  options: IdentityVerificationSheetOptions\n): Promise<IdentityVerificationSheetResult> {\n  await StripeIdentityReactNative.initIdentityVerificationSheet(options);\n  return await StripeIdentityReactNative.presentIdentityVerificationSheet();\n}\n"],"mappings":";;;;;;AAAA,IAAAA,kBAAA,GAAAC,sBAAA,CAAAC,OAAA;AAA4D,SAAAD,uBAAAE,GAAA,WAAAA,GAAA,IAAAA,GAAA,CAAAC,UAAA,GAAAD,GAAA,KAAAE,OAAA,EAAAF,GAAA;AAMrD,eAAeG,gCAAgCA,CACpDC,OAAyC,EACC;EAC1C,MAAMC,0BAAyB,CAACC,6BAA6B,CAACF,OAAO,CAAC;EACtE,OAAO,MAAMC,0BAAyB,CAACF,gCAAgC,EAAE;AAC3E"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js
+index a35e06e..046f853 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js
+@@ -4,11 +4,8 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.useStripeIdentity = useStripeIdentity;
+-
+ var _react = require("react");
+-
+ var _functions = require("../functions");
+-
+ /**
+  * useStripeIdentity hook.
+  *
+@@ -37,7 +34,6 @@ function useStripeIdentity(optionsProvider) {
+   const [loading, setLoading] = (0, _react.useState)(false);
+   const [status, setStatus] = (0, _react.useState)();
+   const [error, setError] = (0, _react.useState)();
+-
+   const present = async () => {
+     setLoading(true);
+     const options = await optionsProvider();
+@@ -49,7 +45,6 @@ function useStripeIdentity(optionsProvider) {
+     setStatus(identityStatus);
+     setError(identityError);
+   };
+-
+   return {
+     present,
+     status,
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js.map
+index 53176d6..6ca9828 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/hooks/useStripeIdentity.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["useStripeIdentity.tsx"],"names":["useStripeIdentity","optionsProvider","loading","setLoading","status","setStatus","error","setError","present","options","identityStatus","identityError"],"mappings":";;;;;;;AAAA;;AACA;;AAOA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACO,SAASA,iBAAT,CACLC,eADK,EAEL;AACA,QAAM,CAACC,OAAD,EAAUC,UAAV,IAAwB,qBAAS,KAAT,CAA9B;AACA,QAAM,CAACC,MAAD,EAASC,SAAT,IAAsB,sBAA5B;AAGA,QAAM,CAACC,KAAD,EAAQC,QAAR,IAAoB,sBAA1B;;AAEA,QAAMC,OAAO,GAAG,YAAY;AAC1BL,IAAAA,UAAU,CAAC,IAAD,CAAV;AACA,UAAMM,OAAO,GAAG,MAAMR,eAAe,EAArC;AACAE,IAAAA,UAAU,CAAC,KAAD,CAAV;AACA,UAAM;AAAEC,MAAAA,MAAM,EAAEM,cAAV;AAA0BJ,MAAAA,KAAK,EAAEK;AAAjC,QACJ,MAAM,iDAAiCF,OAAjC,CADR;AAEAJ,IAAAA,SAAS,CAACK,cAAD,CAAT;AACAH,IAAAA,QAAQ,CAACI,aAAD,CAAR;AACD,GARD;;AAUA,SAAO;AAAEH,IAAAA,OAAF;AAAWJ,IAAAA,MAAX;AAAmBF,IAAAA,OAAnB;AAA4BI,IAAAA;AAA5B,GAAP;AACD","sourcesContent":["import { useState } from 'react';\nimport { presentIdentityVerificationSheet } from '../functions';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetStatus,\n  StripeError,\n} from '../types';\n\n/**\n * useStripeIdentity hook.\n *\n * This hook provides access to the present method,\n * verification status, and loading flag.\n *\n * @param optionsProvider - An optionsProvider method that fetches the\n * VerificationSession ID, ephemeral key secret, and brandLogo.\n *\n * @example\n * ```ts\n * const fechOptionsProvider = async () => {\n *    const response = await fetch('https://${YOUR_SERVER_BASE_URL}/create-verification-session');\n *    const { id, ephemeral_key_secret } = await response.json();\n *    return {\n *      sessionId: id,\n *      ephemeralKeySecret: ephemeral_key_secret,\n *      brandLogo: Image.resolveAssetSource(logo),\n *    };\n *  };\n *\n * const { present, status, loading, error } = useStripeIdentity(fetchOptionsProvider)\n * ```\n */\nexport function useStripeIdentity(\n  optionsProvider: () => Promise<IdentityVerificationSheetOptions>\n) {\n  const [loading, setLoading] = useState(false);\n  const [status, setStatus] = useState<\n    IdentityVerificationSheetStatus | undefined\n  >();\n  const [error, setError] = useState<StripeError | undefined>();\n\n  const present = async () => {\n    setLoading(true);\n    const options = await optionsProvider();\n    setLoading(false);\n    const { status: identityStatus, error: identityError } =\n      await presentIdentityVerificationSheet(options);\n    setStatus(identityStatus);\n    setError(identityError);\n  };\n\n  return { present, status, loading, error };\n}\n"]}
+\ No newline at end of file
++{"version":3,"names":["_react","require","_functions","useStripeIdentity","optionsProvider","loading","setLoading","useState","status","setStatus","error","setError","present","options","identityStatus","identityError","presentIdentityVerificationSheet"],"sources":["useStripeIdentity.tsx"],"sourcesContent":["import { useState } from 'react';\nimport { presentIdentityVerificationSheet } from '../functions';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetStatus,\n  StripeError,\n} from '../types';\n\n/**\n * useStripeIdentity hook.\n *\n * This hook provides access to the present method,\n * verification status, and loading flag.\n *\n * @param optionsProvider - An optionsProvider method that fetches the\n * VerificationSession ID, ephemeral key secret, and brandLogo.\n *\n * @example\n * ```ts\n * const fechOptionsProvider = async () => {\n *    const response = await fetch('https://${YOUR_SERVER_BASE_URL}/create-verification-session');\n *    const { id, ephemeral_key_secret } = await response.json();\n *    return {\n *      sessionId: id,\n *      ephemeralKeySecret: ephemeral_key_secret,\n *      brandLogo: Image.resolveAssetSource(logo),\n *    };\n *  };\n *\n * const { present, status, loading, error } = useStripeIdentity(fetchOptionsProvider)\n * ```\n */\nexport function useStripeIdentity(\n  optionsProvider: () => Promise<IdentityVerificationSheetOptions>\n) {\n  const [loading, setLoading] = useState(false);\n  const [status, setStatus] = useState<\n    IdentityVerificationSheetStatus | undefined\n  >();\n  const [error, setError] = useState<StripeError | undefined>();\n\n  const present = async () => {\n    setLoading(true);\n    const options = await optionsProvider();\n    setLoading(false);\n    const { status: identityStatus, error: identityError } =\n      await presentIdentityVerificationSheet(options);\n    setStatus(identityStatus);\n    setError(identityError);\n  };\n\n  return { present, status, loading, error };\n}\n"],"mappings":";;;;;;AAAA,IAAAA,MAAA,GAAAC,OAAA;AACA,IAAAC,UAAA,GAAAD,OAAA;AAOA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACO,SAASE,iBAAiBA,CAC/BC,eAAgE,EAChE;EACA,MAAM,CAACC,OAAO,EAAEC,UAAU,CAAC,GAAG,IAAAC,eAAQ,EAAC,KAAK,CAAC;EAC7C,MAAM,CAACC,MAAM,EAAEC,SAAS,CAAC,GAAG,IAAAF,eAAQ,GAEjC;EACH,MAAM,CAACG,KAAK,EAAEC,QAAQ,CAAC,GAAG,IAAAJ,eAAQ,GAA2B;EAE7D,MAAMK,OAAO,GAAG,MAAAA,CAAA,KAAY;IAC1BN,UAAU,CAAC,IAAI,CAAC;IAChB,MAAMO,OAAO,GAAG,MAAMT,eAAe,EAAE;IACvCE,UAAU,CAAC,KAAK,CAAC;IACjB,MAAM;MAAEE,MAAM,EAAEM,cAAc;MAAEJ,KAAK,EAAEK;IAAc,CAAC,GACpD,MAAM,IAAAC,2CAAgC,EAACH,OAAO,CAAC;IACjDJ,SAAS,CAACK,cAAc,CAAC;IACzBH,QAAQ,CAACI,aAAa,CAAC;EACzB,CAAC;EAED,OAAO;IAAEH,OAAO;IAAEJ,MAAM;IAAEH,OAAO;IAAEK;EAAM,CAAC;AAC5C"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js
+index 2f7cded..de444b2 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js
+@@ -15,8 +15,6 @@ Object.defineProperty(exports, "useStripeIdentity", {
+     return _useStripeIdentity.useStripeIdentity;
+   }
+ });
+-
+ var _useStripeIdentity = require("./hooks/useStripeIdentity");
+-
+ var _functions = require("./functions");
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js.map
+index 2909f18..6661194 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/index.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;AACA;;AAGA","sourcesContent":["// hooks\nexport { useStripeIdentity } from './hooks/useStripeIdentity';\n\n// functions\nexport { presentIdentityVerificationSheet } from './functions';\n\n// types\nexport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n  IdentityVerificationSheetStatus,\n  StripeError,\n  ErrorType,\n} from './types';\n"]}
+\ No newline at end of file
++{"version":3,"names":["_useStripeIdentity","require","_functions"],"sources":["index.ts"],"sourcesContent":["// hooks\nexport { useStripeIdentity } from './hooks/useStripeIdentity';\n\n// functions\nexport { presentIdentityVerificationSheet } from './functions';\n\n// types\nexport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n  IdentityVerificationSheetStatus,\n  StripeError,\n  ErrorType,\n} from './types';\n"],"mappings":";;;;;;;;;;;;;;;;;AACA,IAAAA,kBAAA,GAAAC,OAAA;AAGA,IAAAC,UAAA,GAAAD,OAAA"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/types.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/types.js.map
+index 9ffd4b2..01b76c8 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/types.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/commonjs/types.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":[],"names":[],"mappings":"","sourcesContent":[]}
+\ No newline at end of file
++{"version":3,"names":[],"sources":["types.ts"],"sourcesContent":["import type { ImageResolvedAssetSource } from 'react-native';\n\nexport type IdentityVerificationSheetOptions = {\n  sessionId: string;\n  ephemeralKeySecret: string;\n  brandLogo: ImageResolvedAssetSource;\n};\n\nexport type IdentityVerificationSheetStatus =\n  | 'FlowCompleted'\n  | 'FlowCanceled'\n  | 'FlowFailed';\n\nexport type IdentityVerificationSheetResult = {\n  status: IdentityVerificationSheetStatus;\n  error?: StripeError;\n};\n\nexport type InitIdentityVerificationSheet = (\n  options: IdentityVerificationSheetOptions\n) => Promise<void>;\n\nexport type PresentIdentityVerificationSheet =\n  () => Promise<IdentityVerificationSheetResult>;\n\nexport type ErrorType =\n  | 'api_connection_error'\n  | 'api_error'\n  | 'authentication_error'\n  | 'card_error'\n  | 'idempotency_error'\n  | 'invalid_request_error'\n  | 'rate_limit_error';\n\nexport type StripeError = {\n  code: IdentityVerificationSheetStatus;\n  message: string;\n  localizedMessage?: string;\n  declineCode?: string;\n  stripeErrorCode?: string;\n  type?: ErrorType;\n};\n"],"mappings":""}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js b/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js
+index 4fc90e6..e46bbd4 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js
+@@ -7,7 +7,6 @@ const StripeIdentityReactNative = NativeModules.StripeIdentityReactNative ? Nati
+   get() {
+     throw new Error(LINKING_ERROR);
+   }
+-
+ });
+ export default StripeIdentityReactNative;
+ //# sourceMappingURL=StripeIdentitySdk.js.map
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js.map
+index ed29f97..278b37a 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/StripeIdentitySdk.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["StripeIdentitySdk.tsx"],"names":["NativeModules","Platform","LINKING_ERROR","select","ios","default","StripeIdentityReactNative","Proxy","get","Error"],"mappings":"AAAA,SAASA,aAAT,EAAwBC,QAAxB,QAAwC,cAAxC;AAMA,MAAMC,aAAa,GAChB,uFAAD,GACAD,QAAQ,CAACE,MAAT,CAAgB;AAAEC,EAAAA,GAAG,EAAE,gCAAP;AAAyCC,EAAAA,OAAO,EAAE;AAAlD,CAAhB,CADA,GAEA,sDAFA,GAGA,6CAJF;AAMA,MAAMC,yBAAyB,GAAGN,aAAa,CAACM,yBAAd,GAC9BN,aAAa,CAACM,yBADgB,GAE9B,IAAIC,KAAJ,CACE,EADF,EAEE;AACEC,EAAAA,GAAG,GAAG;AACJ,UAAM,IAAIC,KAAJ,CAAUP,aAAV,CAAN;AACD;;AAHH,CAFF,CAFJ;AAgBA,eAAeI,yBAAf","sourcesContent":["import { NativeModules, Platform } from 'react-native';\nimport type {\n  InitIdentityVerificationSheet,\n  PresentIdentityVerificationSheet,\n} from './types';\n\nconst LINKING_ERROR =\n  `The package 'stripe-identity-react-native' doesn't seem to be linked. Make sure: \\n\\n` +\n  Platform.select({ ios: \"- You have run 'pod install'\\n\", default: '' }) +\n  '- You rebuilt the app after installing the package\\n' +\n  '- You are not using Expo managed workflow\\n';\n\nconst StripeIdentityReactNative = NativeModules.StripeIdentityReactNative\n  ? NativeModules.StripeIdentityReactNative\n  : new Proxy(\n      {},\n      {\n        get() {\n          throw new Error(LINKING_ERROR);\n        },\n      }\n    );\n\ntype StripeIdentitySdkType = {\n  initIdentityVerificationSheet: InitIdentityVerificationSheet;\n  presentIdentityVerificationSheet: PresentIdentityVerificationSheet;\n};\n\nexport default StripeIdentityReactNative as StripeIdentitySdkType;\n"]}
+\ No newline at end of file
++{"version":3,"names":["NativeModules","Platform","LINKING_ERROR","select","ios","default","StripeIdentityReactNative","Proxy","get","Error"],"sources":["StripeIdentitySdk.tsx"],"sourcesContent":["import { NativeModules, Platform } from 'react-native';\nimport type {\n  InitIdentityVerificationSheet,\n  PresentIdentityVerificationSheet,\n} from './types';\n\nconst LINKING_ERROR =\n  `The package 'stripe-identity-react-native' doesn't seem to be linked. Make sure: \\n\\n` +\n  Platform.select({ ios: \"- You have run 'pod install'\\n\", default: '' }) +\n  '- You rebuilt the app after installing the package\\n' +\n  '- You are not using Expo managed workflow\\n';\n\nconst StripeIdentityReactNative = NativeModules.StripeIdentityReactNative\n  ? NativeModules.StripeIdentityReactNative\n  : new Proxy(\n      {},\n      {\n        get() {\n          throw new Error(LINKING_ERROR);\n        },\n      }\n    );\n\ntype StripeIdentitySdkType = {\n  initIdentityVerificationSheet: InitIdentityVerificationSheet;\n  presentIdentityVerificationSheet: PresentIdentityVerificationSheet;\n};\n\nexport default StripeIdentityReactNative as StripeIdentitySdkType;\n"],"mappings":"AAAA,SAASA,aAAa,EAAEC,QAAQ,QAAQ,cAAc;AAMtD,MAAMC,aAAa,GAChB,uFAAsF,GACvFD,QAAQ,CAACE,MAAM,CAAC;EAAEC,GAAG,EAAE,gCAAgC;EAAEC,OAAO,EAAE;AAAG,CAAC,CAAC,GACvE,sDAAsD,GACtD,6CAA6C;AAE/C,MAAMC,yBAAyB,GAAGN,aAAa,CAACM,yBAAyB,GACrEN,aAAa,CAACM,yBAAyB,GACvC,IAAIC,KAAK,CACP,CAAC,CAAC,EACF;EACEC,GAAGA,CAAA,EAAG;IACJ,MAAM,IAAIC,KAAK,CAACP,aAAa,CAAC;EAChC;AACF,CAAC,CACF;AAOL,eAAeI,yBAAyB"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/functions.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/module/functions.js.map
+index f957e32..c353c38 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/functions.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/functions.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["functions.ts"],"names":["StripeIdentityReactNative","presentIdentityVerificationSheet","options","initIdentityVerificationSheet"],"mappings":"AAAA,OAAOA,yBAAP,MAAsC,qBAAtC;AAMA,OAAO,eAAeC,gCAAf,CACLC,OADK,EAEqC;AAC1C,QAAMF,yBAAyB,CAACG,6BAA1B,CAAwDD,OAAxD,CAAN;AACA,SAAO,MAAMF,yBAAyB,CAACC,gCAA1B,EAAb;AACD","sourcesContent":["import StripeIdentityReactNative from './StripeIdentitySdk';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n} from './types';\n\nexport async function presentIdentityVerificationSheet(\n  options: IdentityVerificationSheetOptions\n): Promise<IdentityVerificationSheetResult> {\n  await StripeIdentityReactNative.initIdentityVerificationSheet(options);\n  return await StripeIdentityReactNative.presentIdentityVerificationSheet();\n}\n"]}
+\ No newline at end of file
++{"version":3,"names":["StripeIdentityReactNative","presentIdentityVerificationSheet","options","initIdentityVerificationSheet"],"sources":["functions.ts"],"sourcesContent":["import StripeIdentityReactNative from './StripeIdentitySdk';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n} from './types';\n\nexport async function presentIdentityVerificationSheet(\n  options: IdentityVerificationSheetOptions\n): Promise<IdentityVerificationSheetResult> {\n  await StripeIdentityReactNative.initIdentityVerificationSheet(options);\n  return await StripeIdentityReactNative.presentIdentityVerificationSheet();\n}\n"],"mappings":"AAAA,OAAOA,yBAAyB,MAAM,qBAAqB;AAM3D,OAAO,eAAeC,gCAAgCA,CACpDC,OAAyC,EACC;EAC1C,MAAMF,yBAAyB,CAACG,6BAA6B,CAACD,OAAO,CAAC;EACtE,OAAO,MAAMF,yBAAyB,CAACC,gCAAgC,EAAE;AAC3E"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js b/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js
+index a2df6c4..395beb7 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js
+@@ -1,6 +1,5 @@
+ import { useState } from 'react';
+ import { presentIdentityVerificationSheet } from '../functions';
+-
+ /**
+  * useStripeIdentity hook.
+  *
+@@ -29,7 +28,6 @@ export function useStripeIdentity(optionsProvider) {
+   const [loading, setLoading] = useState(false);
+   const [status, setStatus] = useState();
+   const [error, setError] = useState();
+-
+   const present = async () => {
+     setLoading(true);
+     const options = await optionsProvider();
+@@ -41,7 +39,6 @@ export function useStripeIdentity(optionsProvider) {
+     setStatus(identityStatus);
+     setError(identityError);
+   };
+-
+   return {
+     present,
+     status,
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js.map
+index f682530..312f6d2 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/hooks/useStripeIdentity.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["useStripeIdentity.tsx"],"names":["useState","presentIdentityVerificationSheet","useStripeIdentity","optionsProvider","loading","setLoading","status","setStatus","error","setError","present","options","identityStatus","identityError"],"mappings":"AAAA,SAASA,QAAT,QAAyB,OAAzB;AACA,SAASC,gCAAT,QAAiD,cAAjD;;AAOA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA,OAAO,SAASC,iBAAT,CACLC,eADK,EAEL;AACA,QAAM,CAACC,OAAD,EAAUC,UAAV,IAAwBL,QAAQ,CAAC,KAAD,CAAtC;AACA,QAAM,CAACM,MAAD,EAASC,SAAT,IAAsBP,QAAQ,EAApC;AAGA,QAAM,CAACQ,KAAD,EAAQC,QAAR,IAAoBT,QAAQ,EAAlC;;AAEA,QAAMU,OAAO,GAAG,YAAY;AAC1BL,IAAAA,UAAU,CAAC,IAAD,CAAV;AACA,UAAMM,OAAO,GAAG,MAAMR,eAAe,EAArC;AACAE,IAAAA,UAAU,CAAC,KAAD,CAAV;AACA,UAAM;AAAEC,MAAAA,MAAM,EAAEM,cAAV;AAA0BJ,MAAAA,KAAK,EAAEK;AAAjC,QACJ,MAAMZ,gCAAgC,CAACU,OAAD,CADxC;AAEAJ,IAAAA,SAAS,CAACK,cAAD,CAAT;AACAH,IAAAA,QAAQ,CAACI,aAAD,CAAR;AACD,GARD;;AAUA,SAAO;AAAEH,IAAAA,OAAF;AAAWJ,IAAAA,MAAX;AAAmBF,IAAAA,OAAnB;AAA4BI,IAAAA;AAA5B,GAAP;AACD","sourcesContent":["import { useState } from 'react';\nimport { presentIdentityVerificationSheet } from '../functions';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetStatus,\n  StripeError,\n} from '../types';\n\n/**\n * useStripeIdentity hook.\n *\n * This hook provides access to the present method,\n * verification status, and loading flag.\n *\n * @param optionsProvider - An optionsProvider method that fetches the\n * VerificationSession ID, ephemeral key secret, and brandLogo.\n *\n * @example\n * ```ts\n * const fechOptionsProvider = async () => {\n *    const response = await fetch('https://${YOUR_SERVER_BASE_URL}/create-verification-session');\n *    const { id, ephemeral_key_secret } = await response.json();\n *    return {\n *      sessionId: id,\n *      ephemeralKeySecret: ephemeral_key_secret,\n *      brandLogo: Image.resolveAssetSource(logo),\n *    };\n *  };\n *\n * const { present, status, loading, error } = useStripeIdentity(fetchOptionsProvider)\n * ```\n */\nexport function useStripeIdentity(\n  optionsProvider: () => Promise<IdentityVerificationSheetOptions>\n) {\n  const [loading, setLoading] = useState(false);\n  const [status, setStatus] = useState<\n    IdentityVerificationSheetStatus | undefined\n  >();\n  const [error, setError] = useState<StripeError | undefined>();\n\n  const present = async () => {\n    setLoading(true);\n    const options = await optionsProvider();\n    setLoading(false);\n    const { status: identityStatus, error: identityError } =\n      await presentIdentityVerificationSheet(options);\n    setStatus(identityStatus);\n    setError(identityError);\n  };\n\n  return { present, status, loading, error };\n}\n"]}
+\ No newline at end of file
++{"version":3,"names":["useState","presentIdentityVerificationSheet","useStripeIdentity","optionsProvider","loading","setLoading","status","setStatus","error","setError","present","options","identityStatus","identityError"],"sources":["useStripeIdentity.tsx"],"sourcesContent":["import { useState } from 'react';\nimport { presentIdentityVerificationSheet } from '../functions';\nimport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetStatus,\n  StripeError,\n} from '../types';\n\n/**\n * useStripeIdentity hook.\n *\n * This hook provides access to the present method,\n * verification status, and loading flag.\n *\n * @param optionsProvider - An optionsProvider method that fetches the\n * VerificationSession ID, ephemeral key secret, and brandLogo.\n *\n * @example\n * ```ts\n * const fechOptionsProvider = async () => {\n *    const response = await fetch('https://${YOUR_SERVER_BASE_URL}/create-verification-session');\n *    const { id, ephemeral_key_secret } = await response.json();\n *    return {\n *      sessionId: id,\n *      ephemeralKeySecret: ephemeral_key_secret,\n *      brandLogo: Image.resolveAssetSource(logo),\n *    };\n *  };\n *\n * const { present, status, loading, error } = useStripeIdentity(fetchOptionsProvider)\n * ```\n */\nexport function useStripeIdentity(\n  optionsProvider: () => Promise<IdentityVerificationSheetOptions>\n) {\n  const [loading, setLoading] = useState(false);\n  const [status, setStatus] = useState<\n    IdentityVerificationSheetStatus | undefined\n  >();\n  const [error, setError] = useState<StripeError | undefined>();\n\n  const present = async () => {\n    setLoading(true);\n    const options = await optionsProvider();\n    setLoading(false);\n    const { status: identityStatus, error: identityError } =\n      await presentIdentityVerificationSheet(options);\n    setStatus(identityStatus);\n    setError(identityError);\n  };\n\n  return { present, status, loading, error };\n}\n"],"mappings":"AAAA,SAASA,QAAQ,QAAQ,OAAO;AAChC,SAASC,gCAAgC,QAAQ,cAAc;AAO/D;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA,OAAO,SAASC,iBAAiBA,CAC/BC,eAAgE,EAChE;EACA,MAAM,CAACC,OAAO,EAAEC,UAAU,CAAC,GAAGL,QAAQ,CAAC,KAAK,CAAC;EAC7C,MAAM,CAACM,MAAM,EAAEC,SAAS,CAAC,GAAGP,QAAQ,EAEjC;EACH,MAAM,CAACQ,KAAK,EAAEC,QAAQ,CAAC,GAAGT,QAAQ,EAA2B;EAE7D,MAAMU,OAAO,GAAG,MAAAA,CAAA,KAAY;IAC1BL,UAAU,CAAC,IAAI,CAAC;IAChB,MAAMM,OAAO,GAAG,MAAMR,eAAe,EAAE;IACvCE,UAAU,CAAC,KAAK,CAAC;IACjB,MAAM;MAAEC,MAAM,EAAEM,cAAc;MAAEJ,KAAK,EAAEK;IAAc,CAAC,GACpD,MAAMZ,gCAAgC,CAACU,OAAO,CAAC;IACjDJ,SAAS,CAACK,cAAc,CAAC;IACzBH,QAAQ,CAACI,aAAa,CAAC;EACzB,CAAC;EAED,OAAO;IAAEH,OAAO;IAAEJ,MAAM;IAAEF,OAAO;IAAEI;EAAM,CAAC;AAC5C"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js b/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js
+index c59910c..ccb7846 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js
+@@ -1,5 +1,8 @@
+ // hooks
+-export { useStripeIdentity } from './hooks/useStripeIdentity'; // functions
++export { useStripeIdentity } from './hooks/useStripeIdentity';
+ 
+-export { presentIdentityVerificationSheet } from './functions'; // types
++// functions
++export { presentIdentityVerificationSheet } from './functions';
++
++// types
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js.map
+index 8347385..fa9e111 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/index.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":["index.ts"],"names":["useStripeIdentity","presentIdentityVerificationSheet"],"mappings":"AAAA;AACA,SAASA,iBAAT,QAAkC,2BAAlC,C,CAEA;;AACA,SAASC,gCAAT,QAAiD,aAAjD,C,CAEA","sourcesContent":["// hooks\nexport { useStripeIdentity } from './hooks/useStripeIdentity';\n\n// functions\nexport { presentIdentityVerificationSheet } from './functions';\n\n// types\nexport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n  IdentityVerificationSheetStatus,\n  StripeError,\n  ErrorType,\n} from './types';\n"]}
+\ No newline at end of file
++{"version":3,"names":["useStripeIdentity","presentIdentityVerificationSheet"],"sources":["index.ts"],"sourcesContent":["// hooks\nexport { useStripeIdentity } from './hooks/useStripeIdentity';\n\n// functions\nexport { presentIdentityVerificationSheet } from './functions';\n\n// types\nexport type {\n  IdentityVerificationSheetOptions,\n  IdentityVerificationSheetResult,\n  IdentityVerificationSheetStatus,\n  StripeError,\n  ErrorType,\n} from './types';\n"],"mappings":"AAAA;AACA,SAASA,iBAAiB,QAAQ,2BAA2B;;AAE7D;AACA,SAASC,gCAAgC,QAAQ,aAAa;;AAE9D"}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/module/types.js.map b/node_modules/@stripe/stripe-identity-react-native/lib/module/types.js.map
+index 9ffd4b2..01b76c8 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/module/types.js.map
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/module/types.js.map
+@@ -1 +1 @@
+-{"version":3,"sources":[],"names":[],"mappings":"","sourcesContent":[]}
+\ No newline at end of file
++{"version":3,"names":[],"sources":["types.ts"],"sourcesContent":["import type { ImageResolvedAssetSource } from 'react-native';\n\nexport type IdentityVerificationSheetOptions = {\n  sessionId: string;\n  ephemeralKeySecret: string;\n  brandLogo: ImageResolvedAssetSource;\n};\n\nexport type IdentityVerificationSheetStatus =\n  | 'FlowCompleted'\n  | 'FlowCanceled'\n  | 'FlowFailed';\n\nexport type IdentityVerificationSheetResult = {\n  status: IdentityVerificationSheetStatus;\n  error?: StripeError;\n};\n\nexport type InitIdentityVerificationSheet = (\n  options: IdentityVerificationSheetOptions\n) => Promise<void>;\n\nexport type PresentIdentityVerificationSheet =\n  () => Promise<IdentityVerificationSheetResult>;\n\nexport type ErrorType =\n  | 'api_connection_error'\n  | 'api_error'\n  | 'authentication_error'\n  | 'card_error'\n  | 'idempotency_error'\n  | 'invalid_request_error'\n  | 'rate_limit_error';\n\nexport type StripeError = {\n  code: IdentityVerificationSheetStatus;\n  message: string;\n  localizedMessage?: string;\n  declineCode?: string;\n  stripeErrorCode?: string;\n  type?: ErrorType;\n};\n"],"mappings":""}
+\ No newline at end of file
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/typescript/StripeIdentitySdk.d.ts b/node_modules/@stripe/stripe-identity-react-native/lib/typescript/StripeIdentitySdk.d.ts
+index 36efec6..6ef5385 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/typescript/StripeIdentitySdk.d.ts
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/typescript/StripeIdentitySdk.d.ts
+@@ -1,5 +1,5 @@
+ import type { InitIdentityVerificationSheet, PresentIdentityVerificationSheet } from './types';
+-declare type StripeIdentitySdkType = {
++type StripeIdentitySdkType = {
+     initIdentityVerificationSheet: InitIdentityVerificationSheet;
+     presentIdentityVerificationSheet: PresentIdentityVerificationSheet;
+ };
+diff --git a/node_modules/@stripe/stripe-identity-react-native/lib/typescript/types.d.ts b/node_modules/@stripe/stripe-identity-react-native/lib/typescript/types.d.ts
+index fca3acd..6f78898 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/lib/typescript/types.d.ts
++++ b/node_modules/@stripe/stripe-identity-react-native/lib/typescript/types.d.ts
+@@ -1,18 +1,18 @@
+ import type { ImageResolvedAssetSource } from 'react-native';
+-export declare type IdentityVerificationSheetOptions = {
++export type IdentityVerificationSheetOptions = {
+     sessionId: string;
+     ephemeralKeySecret: string;
+     brandLogo: ImageResolvedAssetSource;
+ };
+-export declare type IdentityVerificationSheetStatus = 'FlowCompleted' | 'FlowCanceled' | 'FlowFailed';
+-export declare type IdentityVerificationSheetResult = {
++export type IdentityVerificationSheetStatus = 'FlowCompleted' | 'FlowCanceled' | 'FlowFailed';
++export type IdentityVerificationSheetResult = {
+     status: IdentityVerificationSheetStatus;
+     error?: StripeError;
+ };
+-export declare type InitIdentityVerificationSheet = (options: IdentityVerificationSheetOptions) => Promise<void>;
+-export declare type PresentIdentityVerificationSheet = () => Promise<IdentityVerificationSheetResult>;
+-export declare type ErrorType = 'api_connection_error' | 'api_error' | 'authentication_error' | 'card_error' | 'idempotency_error' | 'invalid_request_error' | 'rate_limit_error';
+-export declare type StripeError = {
++export type InitIdentityVerificationSheet = (options: IdentityVerificationSheetOptions) => Promise<void>;
++export type PresentIdentityVerificationSheet = () => Promise<IdentityVerificationSheetResult>;
++export type ErrorType = 'api_connection_error' | 'api_error' | 'authentication_error' | 'card_error' | 'idempotency_error' | 'invalid_request_error' | 'rate_limit_error';
++export type StripeError = {
+     code: IdentityVerificationSheetStatus;
+     message: string;
+     localizedMessage?: string;
+diff --git a/node_modules/@stripe/stripe-identity-react-native/stripe-identity-react-native.podspec b/node_modules/@stripe/stripe-identity-react-native/stripe-identity-react-native.podspec
+index 2612bc6..9b7ca60 100644
+--- a/node_modules/@stripe/stripe-identity-react-native/stripe-identity-react-native.podspec
++++ b/node_modules/@stripe/stripe-identity-react-native/stripe-identity-react-native.podspec
+@@ -2,6 +2,9 @@ require 'json'
+ 
+ package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+ 
++# When stripe_version is updated, also need to update stripe_version in https://github.com/stripe/stripe-react-native/blob/master/stripe-react-native.podspec
++stripe_version = '~> 23.7.0'
++
+ Pod::Spec.new do |s|
+   s.name         = 'stripe-identity-react-native'
+   s.version      = package['version']
+@@ -16,5 +19,5 @@ Pod::Spec.new do |s|
+   s.source_files = 'ios/**/*.{h,m,mm,swift}'
+ 
+   s.dependency 'React-Core'
+-  s.dependency 'StripeIdentity', '~> 23.4.2'
++  s.dependency 'StripeIdentity', stripe_version
+ end
