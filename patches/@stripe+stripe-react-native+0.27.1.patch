@@ -1,0 +1,75 @@
+diff --git a/node_modules/@stripe/stripe-react-native/android/gradle.properties b/node_modules/@stripe/stripe-react-native/android/gradle.properties
+index 087c785..32bf15a 100644
+--- a/node_modules/@stripe/stripe-react-native/android/gradle.properties
++++ b/node_modules/@stripe/stripe-react-native/android/gradle.properties
+@@ -1,3 +1,3 @@
+ StripeSdk_kotlinVersion=1.8.0
+ # Keep StripeSdk_stripeVersion in sync with https://github.com/stripe/stripe-identity-react-native/blob/main/android/gradle.properties
+-StripeSdk_stripeVersion=20.24.0
++StripeSdk_stripeVersion=20.24.2
+diff --git a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/AuBECSDebitFormView.kt b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/AuBECSDebitFormView.kt
+index f158db3..c951778 100644
+--- a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/AuBECSDebitFormView.kt
++++ b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/AuBECSDebitFormView.kt
+@@ -12,7 +12,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
+ import com.google.android.material.shape.ShapeAppearanceModel
+ import com.reactnativestripesdk.utils.getIntOrNull
+ import com.reactnativestripesdk.utils.getValOr
+-import com.stripe.android.databinding.BecsDebitWidgetBinding
++import com.stripe.android.databinding.StripeBecsDebitWidgetBinding
+ import com.stripe.android.model.PaymentMethodCreateParams
+ import com.stripe.android.view.BecsDebitWidget
+ import com.stripe.android.view.StripeEditText
+@@ -35,7 +35,7 @@ class AuBECSDebitFormView(private val context: ThemedReactContext) : FrameLayout
+     if (!this::becsDebitWidget.isInitialized || value == null) {
+       return
+     }
+-    val binding = BecsDebitWidgetBinding.bind(becsDebitWidget)
++    val binding = StripeBecsDebitWidgetBinding.bind(becsDebitWidget)
+     val textColor = getValOr(value, "textColor", null)
+     val textErrorColor = getValOr(value, "textErrorColor", null)
+     val placeholderColor = getValOr(value, "placeholderColor", null)
+diff --git a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFieldView.kt b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFieldView.kt
+index 224dfdb..53b7c20 100644
+--- a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFieldView.kt
++++ b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFieldView.kt
+@@ -22,7 +22,7 @@ import com.reactnativestripesdk.utils.*
+ import com.reactnativestripesdk.utils.mapCardBrand
+ import com.stripe.android.core.model.CountryCode
+ import com.stripe.android.core.model.CountryUtils
+-import com.stripe.android.databinding.CardInputWidgetBinding
++import com.stripe.android.databinding.StripeCardInputWidgetBinding
+ import com.stripe.android.model.Address
+ import com.stripe.android.model.PaymentMethodCreateParams
+ import com.stripe.android.view.CardInputListener
+@@ -32,7 +32,7 @@ import com.stripe.android.view.StripeEditText
+ 
+ class CardFieldView(context: ThemedReactContext) : FrameLayout(context) {
+   private var mCardWidget: CardInputWidget = CardInputWidget(context)
+-  private val cardInputWidgetBinding = CardInputWidgetBinding.bind(mCardWidget)
++  private val cardInputWidgetBinding = StripeCardInputWidgetBinding.bind(mCardWidget)
+   val cardDetails: MutableMap<String, Any?> = mutableMapOf("brand" to "", "last4" to "", "expiryMonth" to null, "expiryYear" to null, "postalCode" to "", "validNumber" to "Unknown", "validCVC" to "Unknown", "validExpiryDate" to "Unknown")
+   var cardParams: PaymentMethodCreateParams.Card? = null
+   var cardAddress: Address? = null
+diff --git a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFormView.kt b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFormView.kt
+index a20113f..6fc3cd4 100644
+--- a/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFormView.kt
++++ b/node_modules/@stripe/stripe-react-native/android/src/main/java/com/reactnativestripesdk/CardFormView.kt
+@@ -20,7 +20,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
+ import com.reactnativestripesdk.utils.*
+ import com.reactnativestripesdk.utils.mapCardBrand
+ import com.stripe.android.core.model.CountryCode
+-import com.stripe.android.databinding.CardMultilineWidgetBinding
++import com.stripe.android.databinding.StripeCardMultilineWidgetBinding
+ import com.stripe.android.databinding.StripeCardFormViewBinding
+ import com.stripe.android.model.Address
+ import com.stripe.android.model.PaymentMethodCreateParams
+@@ -35,7 +35,7 @@ class CardFormView(context: ThemedReactContext) : FrameLayout(context) {
+   var cardParams: PaymentMethodCreateParams.Card? = null
+   var cardAddress: Address? = null
+   private val cardFormViewBinding = StripeCardFormViewBinding.bind(cardForm)
+-  private val multilineWidgetBinding = CardMultilineWidgetBinding.bind(cardFormViewBinding.cardMultilineWidget)
++  private val multilineWidgetBinding = StripeCardMultilineWidgetBinding.bind(cardFormViewBinding.cardMultilineWidget)
+ 
+   init {
+     cardFormViewBinding.cardMultilineWidgetContainer.isFocusable = true
