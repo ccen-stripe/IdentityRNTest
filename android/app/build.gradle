@@ -279,6 +279,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
 
 if (isNewArchitectureEnabled()) {
